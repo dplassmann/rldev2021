@@ -12,23 +12,17 @@ namespace TutorialRoguelike
     {
         public const int Width = 80;
         public const int Height = 50;
-        public static Point PlayerPosition = new Point(Width / 2, Height / 2);
+
+        private static Entity Player;
+        private static Renderer EntityManager;
 
         static void Main(string[] args)
         {
             Game.Create(Width, Height);
             Settings.WindowTitle = "Yet Another Roguelike Tutorial";
             Game.Instance.OnStart = Init;
-            Game.Instance.FrameUpdate += Instance_FrameUpdate;
             Game.Instance.Run();
             Game.Instance.Dispose();
-        }
-
-        private static void Instance_FrameUpdate(object sender, GameHost e)
-        {
-            var console = (Console)GameHost.Instance.Screen;
-            console.Clear();
-            console.Print(PlayerPosition.X, PlayerPosition.Y, "@");
         }
 
         private static void Init()
@@ -36,7 +30,13 @@ namespace TutorialRoguelike
             // Any startup code for your game. We will use an example console for now
             var startingConsole = (Console)GameHost.Instance.Screen;
             startingConsole.IsFocused = true;
+            EntityManager = new Renderer();
+            startingConsole.SadComponents.Add(EntityManager);
             startingConsole.SadComponents.Add(new KeyboardHandler());
+
+            Player = new Entity(new ColoredGlyph(Color.White, Color.Black, '@'), 10);
+            Player.Position = new Point(Width / 2, Height / 2);
+            EntityManager.Add(Player);
         }
 
         public static void HandleAction(IAction action)
@@ -47,7 +47,7 @@ namespace TutorialRoguelike
             }
             if (action is MovementAction move)
             {
-                PlayerPosition = PlayerPosition.Add(move.Delta);
+                Player.Position = Player.Position.Add(move.Delta);
             }
         }
     }
