@@ -1,0 +1,3 @@
+[submodule "TheSadRogue.Integration"]
+	path = TheSadRogue.Integration
+	url = https://github.com/thesadrogue/TheSadRogue.Integration.git
