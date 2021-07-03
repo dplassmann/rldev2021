@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ApplicationIcon />
+    <StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GoRogue" Version="3.0.0-alpha04-debug" />
+    <PackageReference Include="SadConsole.Host.MonoGame" Version="9.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\TheSadRogue.Integration\TheSadRogue.Integration\TheSadRogue.Integration.csproj" />
+  </ItemGroup>
+
+</Project>
