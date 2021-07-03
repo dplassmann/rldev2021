@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\TheSadRogue.Integration\TheSadRogue.Integration\TheSadRogue.Integration.csproj" />
+    <ProjectReference Include="..\TheSadRogue.Integration\TheSadRogue.Integration\TheSadRogue.Integration.csproj" />
   </ItemGroup>
 
 </Project>

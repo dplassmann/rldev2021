@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TutorialRoguelike.GoRogue", "TutorialRoguelike.GoRogue\TutorialRoguelike.GoRogue.csproj", "{CD630E71-6E6B-4995-A15F-F8D0FD4A5E34}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheSadRogue.Integration", "..\TheSadRogue.Integration\TheSadRogue.Integration\TheSadRogue.Integration.csproj", "{254C8BAA-F2E6-48CC-B747-27984F2BD9BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheSadRogue.Integration", "TheSadRogue.Integration\TheSadRogue.Integration\TheSadRogue.Integration.csproj", "{254C8BAA-F2E6-48CC-B747-27984F2BD9BF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TutorialRoguelike.Manual", "TutorialRoguelike.Manual\TutorialRoguelike.Manual.csproj", "{C878F32B-4DB3-40DE-9FD2-8A0D25D30D89}"
 EndProject

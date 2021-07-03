@@ -4,7 +4,7 @@ using SadRogue.Primitives;
 using SadConsole.Input;
 using TutorialRoguelike.Actions;
 
-namespace TutorialRoguelike
+namespace TutorialRoguelike.GoRogue
 {
     public class Player : RogueLikeEntity
     {

@@ -15,7 +15,7 @@ namespace TutorialRoguelike.Manual
         static void Main(string[] args)
         {
             Game.Create(Width, Height);
-            Settings.WindowTitle = "Yet Another Roguelike Tutorial - GoRogue Version";
+            Settings.WindowTitle = "Yet Another Roguelike Tutorial - Manual Version";
             Game.Instance.OnStart = Init;
             Game.Instance.FrameUpdate += Instance_FrameUpdate;
             Game.Instance.Run();

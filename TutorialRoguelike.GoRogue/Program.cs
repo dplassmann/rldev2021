@@ -2,7 +2,7 @@
 using SadRogue.Primitives;
 using SadRogue.Integration.Maps;
 
-namespace TutorialRoguelike
+namespace TutorialRoguelike.GoRogue
 {
     class Program
     {
@@ -15,7 +15,7 @@ namespace TutorialRoguelike
         static void Main(string[] args)
         {
             Game.Create(Width, Height);
-            Settings.WindowTitle = "Yet Another Roguelike Tutorial - Framework Version";
+            Settings.WindowTitle = "Yet Another Roguelike Tutorial - GoRogue Version";
             Game.Instance.OnStart = Init;
             Game.Instance.Run();
             Game.Instance.Dispose();
