@@ -1,6 +1,10 @@
-﻿namespace TutorialRoguelike.Actions
+﻿using System;
+using SadConsole;
+
+namespace TutorialRoguelike.Actions
 {
-    class EscapeAction : IAction
+    public class EscapeAction : IAction
     {
+        public static Action Action = Game.Instance.MonoGameInstance.Exit;
     }
 }

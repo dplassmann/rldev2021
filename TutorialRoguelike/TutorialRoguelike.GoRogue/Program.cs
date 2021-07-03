@@ -1,6 +1,5 @@
 ﻿using SadConsole;
 using SadRogue.Primitives;
-using TutorialRoguelike.Actions;
 using SadRogue.Integration.Maps;
 
 namespace TutorialRoguelike
@@ -39,18 +38,6 @@ namespace TutorialRoguelike
         private static RogueLikeMap GenerateMap()
         {
             return new RogueLikeMap(Width, Height, 1, Distance.Manhattan);
-        }
-
-        public static void HandleAction(IAction action)
-        {
-            if (action is EscapeAction)
-            {
-                Game.Instance.MonoGameInstance.Exit();
-            }
-            if (action is MovementAction move)
-            {
-                Player.Position = Player.Position.Add(move.Delta);
-            }
         }
     }
 }
