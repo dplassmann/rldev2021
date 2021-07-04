@@ -1,6 +1,6 @@
 ﻿namespace TutorialRoguelike.Actions
 {
-    interface IAction
+    public interface IAction
     {
     }
 }

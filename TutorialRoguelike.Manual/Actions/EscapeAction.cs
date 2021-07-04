@@ -1,6 +1,6 @@
 ﻿namespace TutorialRoguelike.Actions
 {
-    class EscapeAction : IAction
+    public class EscapeAction : IAction
     {
     }
 }

@@ -2,17 +2,8 @@
 
 namespace TutorialRoguelike.Manual
 {
-    public class Player
+    public class Player : Entity
     {
-        public Point Position { get; set; }
-
-        public Player(Point position)
-        {
-            Position = position;
-        }
-        public Player(int x, int y)
-        {
-            Position = (x, y);
-        }
+        public Player(Point position) : base(position, '@', Color.White) { }
     }
 }

@@ -26,7 +26,7 @@ namespace TutorialRoguelike.Manual
 
             if (action != null)
             {
-                Program.HandleAction(action);
+                Program.Engine.HandleAction(action);
                 handled = true;
             }
         }

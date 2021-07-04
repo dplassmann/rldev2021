@@ -2,7 +2,7 @@
 
 namespace TutorialRoguelike.Actions
 {
-    class MovementAction : IAction
+    public class MovementAction : IAction
     {
         public Point Delta { get; private set; }
         public MovementAction(int x, int y)

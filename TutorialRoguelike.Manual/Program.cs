@@ -1,4 +1,5 @@
-﻿using SadConsole;
+﻿using System.Collections.Generic;
+using SadConsole;
 using SadRogue.Primitives;
 using TutorialRoguelike.Actions;
 using Console = SadConsole.Console;
@@ -10,7 +11,7 @@ namespace TutorialRoguelike.Manual
         public const int Width = 80;
         public const int Height = 50;
 
-        private static Player Player;
+        public static Engine Engine;
 
         static void Main(string[] args)
         {
@@ -22,6 +23,11 @@ namespace TutorialRoguelike.Manual
             Game.Instance.Dispose();
         }
 
+        private static void Instance_FrameUpdate(object sender, GameHost e)
+        {
+            Engine.Render((Console) Game.Instance.Screen);
+        }
+
         private static void Init()
         {
             // Any startup code for your game. We will use an example console for now
@@ -29,26 +35,11 @@ namespace TutorialRoguelike.Manual
             startingConsole.IsFocused = true;
             startingConsole.SadComponents.Add(new KeyboardHandler());
             
-            Player = new Player(Width / 2, Height / 2);
-        }
+            var player = new Player((Width / 2, Height / 2));
+            var npc = new Entity((Width / 2 - 5, Height / 2), 'n', Color.Yellow);
+            var entities = new HashSet<Entity> { player, npc };
 
-        private static void Instance_FrameUpdate(object sender, GameHost e)
-        {
-            var console = (Console)GameHost.Instance.Screen;
-            console.Clear();
-            console.Print(Player.Position.X, Player.Position.Y, "@");
-        }
-
-        public static void HandleAction(IAction action)
-        {
-            if (action is EscapeAction)
-            {
-                Game.Instance.MonoGameInstance.Exit();
-            }
-            if (action is MovementAction move)
-            {
-                Player.Position = Player.Position.Add(move.Delta);
-            }
+            Engine = new Engine(entities, player);
         }
     }
 }
