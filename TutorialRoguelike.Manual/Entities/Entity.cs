@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SadConsole;
+﻿using SadConsole;
 using SadRogue.Primitives;
 
 namespace TutorialRoguelike.Manual.Entities
