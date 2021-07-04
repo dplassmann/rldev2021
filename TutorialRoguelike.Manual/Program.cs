@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using SadConsole;
 using SadRogue.Primitives;
-using TutorialRoguelike.Actions;
+using TutorialRoguelike.Manual.Entities;
 using Console = SadConsole.Console;
 
 namespace TutorialRoguelike.Manual
@@ -38,8 +38,9 @@ namespace TutorialRoguelike.Manual
             var player = new Player((Width / 2, Height / 2));
             var npc = new Entity((Width / 2 - 5, Height / 2), 'n', Color.Yellow);
             var entities = new HashSet<Entity> { player, npc };
+            var map = new GameMap((Width, Height));
 
-            Engine = new Engine(entities, player);
+            Engine = new Engine(entities, player, map);
         }
     }
 }

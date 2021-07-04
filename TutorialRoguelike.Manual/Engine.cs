@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using SadConsole;
 using TutorialRoguelike.Actions;
+using TutorialRoguelike.Manual.Entities;
 
 namespace TutorialRoguelike.Manual
 {
@@ -8,18 +9,25 @@ namespace TutorialRoguelike.Manual
     {
         public ISet<Entity> Entities;
         public Entity Player;
+        public GameMap Map;
 
-        public Engine(ISet<Entity> entities, Entity player)
+        public Engine(ISet<Entity> entities, Entity player, GameMap map)
         {
             Entities = entities;
             Player = player;
+            Map = map;
         }
         public void Render(Console console)
         {
             console.Clear();
+            Map.Render(console);
             foreach (var entity in Entities)
             {
-                console.Print(entity.Position.X, entity.Position.Y, entity.Glyph);
+                //Force transparency by copying onto cloned map tile
+                var displayGlyph = Map.TileAt(entity.Position).Glyph.Clone();
+                displayGlyph.Foreground = entity.Glyph.Foreground;
+                displayGlyph.Glyph = entity.Glyph.Glyph;
+                console.Print(entity.Position.X, entity.Position.Y, displayGlyph);
             }
         }
 
@@ -31,7 +39,9 @@ namespace TutorialRoguelike.Manual
             }
             if (action is MovementAction move)
             {
-                Player.Move(move.Delta);
+                var newPosition = Player.Position + move.Delta;
+                if (Map.TileAt(newPosition).IsWalkable)
+                    Player.Move(move.Delta);
             }
         }
     }

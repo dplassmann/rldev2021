@@ -4,7 +4,7 @@ using System.Text;
 using SadConsole;
 using SadRogue.Primitives;
 
-namespace TutorialRoguelike.Manual
+namespace TutorialRoguelike.Manual.Entities
 {
     public class Entity
     {
