@@ -1,4 +1,6 @@
 ﻿using SadRogue.Primitives;
+using TutorialRoguelike.Manual;
+using TutorialRoguelike.Manual.Entities;
 
 namespace TutorialRoguelike.Actions
 {
@@ -12,6 +14,13 @@ namespace TutorialRoguelike.Actions
         public MovementAction(Point delta)
         {
             Delta = delta;
+        }
+
+        public void Perform(Engine engine, Entity entity)
+        {
+            var newPosition = entity.Position + Delta;
+            if (engine.Map.TileAt(newPosition).IsWalkable)
+                entity.Move(Delta);
         }
     }
 }

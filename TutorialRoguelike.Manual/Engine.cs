@@ -33,16 +33,7 @@ namespace TutorialRoguelike.Manual
 
         public void HandleAction(IAction action)
         {
-            if (action is EscapeAction)
-            {
-                Game.Instance.MonoGameInstance.Exit();
-            }
-            if (action is MovementAction move)
-            {
-                var newPosition = Player.Position + move.Delta;
-                if (Map.TileAt(newPosition).IsWalkable)
-                    Player.Move(move.Delta);
-            }
+            action.Perform(this, Player);
         }
     }
 }
