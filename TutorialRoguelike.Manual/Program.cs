@@ -30,17 +30,16 @@ namespace TutorialRoguelike.Manual
 
         private static void Init()
         {
-            // Any startup code for your game. We will use an example console for now
-            var startingConsole = (Console)GameHost.Instance.Screen;
-            startingConsole.IsFocused = true;
-            startingConsole.SadComponents.Add(new KeyboardHandler());
-            
             var player = new Player((Width / 2, Height / 2));
             var npc = new Entity((Width / 2 - 5, Height / 2), 'n', Color.Yellow);
             var entities = new HashSet<Entity> { player, npc };
             var map = new GameMap((Width, Height));
 
             Engine = new Engine(entities, player, map);
+
+            var startingConsole = (Console)GameHost.Instance.Screen;
+            startingConsole.IsFocused = true;
+            startingConsole.SadComponents.Add(new KeyboardHandler(Engine.HandleAction));
         }
     }
 }

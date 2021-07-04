@@ -1,4 +1,5 @@
-﻿using SadConsole;
+﻿using System;
+using SadConsole;
 using SadConsole.Components;
 using SadConsole.Input;
 using TutorialRoguelike.Actions;
@@ -7,6 +8,13 @@ namespace TutorialRoguelike.Manual
 {
     class KeyboardHandler : KeyboardConsoleComponent
     {
+        public Action<IAction> ActionHandler;
+
+        public KeyboardHandler(Action<IAction> actionHandler)
+        {
+            ActionHandler = actionHandler;
+        }
+
         public override void ProcessKeyboard(IScreenObject host, Keyboard keyboard, out bool handled)
         {
             IAction action = null;
@@ -26,7 +34,7 @@ namespace TutorialRoguelike.Manual
 
             if (action != null)
             {
-                Program.Engine.HandleAction(action);
+                ActionHandler(action);
                 handled = true;
             }
         }
