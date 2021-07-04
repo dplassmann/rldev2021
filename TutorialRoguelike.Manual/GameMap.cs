@@ -43,8 +43,7 @@ namespace TutorialRoguelike.Manual
             }
         }
 
-        public Tile TileAt(Point position) {
-            return Tiles[position.X, position.Y];
-        }
+        public Tile this[Point position] => Tiles[position.X, position.Y];
+        public Tile this[int x, int y] => Tiles[x,y];
     }
 }

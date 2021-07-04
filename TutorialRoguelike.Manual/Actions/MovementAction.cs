@@ -19,7 +19,7 @@ namespace TutorialRoguelike.Actions
         public void Perform(Engine engine, Entity entity)
         {
             var newPosition = entity.Position + Delta;
-            if (engine.Map.InBounds(newPosition) && engine.Map.TileAt(newPosition).IsWalkable)
+            if (engine.Map.InBounds(newPosition) && engine.Map[newPosition].IsWalkable)
                 entity.Move(Delta);
         }
     }

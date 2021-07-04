@@ -24,9 +24,9 @@ namespace TutorialRoguelike.Manual
             foreach (var entity in Entities)
             {
                 //Force transparency by copying onto cloned map tile
-                var displayGlyph = Map.TileAt(entity.Position).Glyph.Clone();
-                displayGlyph.Foreground = entity.Glyph.Foreground;
-                displayGlyph.Glyph = entity.Glyph.Glyph;
+                var displayGlyph = Map[entity.Position].Glyph.Clone();
+                displayGlyph.Foreground = entity.Appearance.Foreground;
+                displayGlyph.Glyph = entity.Appearance.Glyph;
                 console.Print(entity.Position.X, entity.Position.Y, displayGlyph);
             }
         }

@@ -5,7 +5,7 @@ namespace TutorialRoguelike.Manual
 {
     public class TileFactory
     {
-        public static Tile Floor { get { return new Tile(true, true, new ColoredGlyph(Color.White, Colors.Floor, ' '), new ColoredGlyph(Color.White, Colors.Floor, ' ')); } }
-        public static Tile Wall { get { return new Tile(false, false, new ColoredGlyph(Color.White, Colors.Wall, ' '), new ColoredGlyph(Color.White, Colors.Wall, ' ')); } }
+        public static Tile Floor => new Tile(true, true, new ColoredGlyph(Color.White, Colors.Floor, ' '), new ColoredGlyph(Color.White, Colors.Floor, ' '));
+        public static Tile Wall => new Tile(false, false, new ColoredGlyph(Color.White, Colors.Wall, ' '), new ColoredGlyph(Color.White, Colors.Wall, ' '));
     }
 }

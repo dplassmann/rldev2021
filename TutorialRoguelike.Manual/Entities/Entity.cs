@@ -6,17 +6,17 @@ namespace TutorialRoguelike.Manual.Entities
     public class Entity
     {
         public Point Position;
-        public ColoredGlyph Glyph;
+        public ColoredGlyph Appearance;
 
         public Entity(Point position, ColoredGlyph glyph)
         {
             Position = position;
-            Glyph = glyph;
+            Appearance = glyph;
         }
         public Entity(Point position, char glyph, Color color)
         {
             Position = position;
-            Glyph = new ColoredGlyph(color, Color.Transparent, glyph);
+            Appearance = new ColoredGlyph(color, Color.Transparent, glyph);
         }
 
         public void Move(Point delta)
