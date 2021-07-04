@@ -8,7 +8,7 @@ namespace TutorialRoguelike.GoRogue
 {
     public class Player : RogueLikeEntity
     {
-        public Player(Point position) : base(position, '@', false)
+        public Player(Point position) : base(position, Colors.Player, '@', false)
         {
             var motionControl = new PlayerControlsComponent();
             motionControl.AddKeyCommand(Keys.Escape, EscapeAction.Action);

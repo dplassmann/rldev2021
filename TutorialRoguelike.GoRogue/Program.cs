@@ -1,6 +1,6 @@
 ﻿using SadConsole;
 using SadRogue.Primitives;
-using SadRogue.Integration.Maps;
+using SadRogue.Integration;
 
 namespace TutorialRoguelike.GoRogue
 {
@@ -9,9 +9,8 @@ namespace TutorialRoguelike.GoRogue
         public static readonly Point DungeonSize = (80, 50);
         public static readonly Point MapSize = (80, 50);
 
-
         private static Player Player;
-        private static DungeonMap Map;
+        private static DungeonMap DungeonMap;
 
         static void Main(string[] args)
         {
@@ -24,21 +23,17 @@ namespace TutorialRoguelike.GoRogue
 
         private static void Init()
         {
-            Map = GenerateMap();
-            Player = GeneratePlayer();
-            Map.AddEntity(Player);
+            DungeonMap = new DungeonMap(DungeonSize, MapSize);
+            Player = new Player(MapSize / 2);
+            DungeonMap.AddEntity(Player);
+            DungeonMap.AddEntity(GenerateNpc(Player.Position - (5,0)));
 
-            Game.Instance.Screen = Map;
+            Game.Instance.Screen = DungeonMap;
         }
 
-        private static Player GeneratePlayer()
+        private static RogueLikeEntity GenerateNpc(Point position)
         {
-            return new Player(MapSize / 2);
-        }
-
-        private static DungeonMap GenerateMap()
-        {
-            return new DungeonMap(DungeonSize, MapSize);
+            return new RogueLikeEntity(position, Colors.Npc, 'n', false);
         }
     }
 }
