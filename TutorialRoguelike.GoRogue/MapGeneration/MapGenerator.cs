@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using GoRogue.MapGeneration;
+using SadRogue.Integration;
 using SadRogue.Primitives;
 using SadRogue.Primitives.GridViews;
 using TutorialRoguelike.GoRogue.Terrain;
@@ -9,7 +10,7 @@ namespace TutorialRoguelike.GoRogue.MapGeneration
 {
     public class MapGenerator
     {
-        public ISettableGridView<TileTypes> Tiles;
+        public ISettableGridView<RogueLikeCell> Terrain;
         public Point PlayerSpawnPoint;
 
         public MapGenerator(int maxRooms, int roomMinSize, int roomMaxSize, int dungeonWidth, int dungeonHeight)
@@ -22,7 +23,7 @@ namespace TutorialRoguelike.GoRogue.MapGeneration
                         new TunnelsStep(),
                         new DigStep());
                 });
-            Tiles = generator.Context.GetFirst<ISettableGridView<TileTypes>>("WallFloor");
+            Terrain = generator.Context.GetFirst<ISettableGridView<RogueLikeCell>>("WallFloor");
             PlayerSpawnPoint = generator.Context.GetFirst<IEnumerable<RectangularRoom>>("Rooms").First().Center;
         }
     }

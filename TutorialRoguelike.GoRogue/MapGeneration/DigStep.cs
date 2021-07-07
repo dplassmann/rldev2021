@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using GoRogue.MapGeneration;
+using SadRogue.Integration;
 using SadRogue.Primitives;
 using SadRogue.Primitives.GridViews;
 using TutorialRoguelike.GoRogue.Terrain;
@@ -12,22 +14,23 @@ namespace TutorialRoguelike.GoRogue.MapGeneration
 
         protected override IEnumerator<object> OnPerform(GenerationContext context)
         {
-            var roomsContext = context.GetFirst<List<RectangularRoom>>("Rooms");
-            var tunnelsContext = context.GetFirst<List<IEnumerable<Point>>>("Tunnels");
+            var rooms = context.GetFirst<List<RectangularRoom>>("Rooms");
+            var tunnels = context.GetFirst<List<IEnumerable<Point>>>("Tunnels");
 
-            var wallFloor = context.GetFirstOrNew<ISettableGridView<TileTypes>>(() => new ArrayView<TileTypes>(context.Width, context.Height), "WallFloor");
-            wallFloor.Fill(TileTypes.Wall);
+            var wallFloor = context.GetFirstOrNew<ISettableGridView<RogueLikeCell>>(() => new ArrayView<RogueLikeCell>(context.Width, context.Height), "WallFloor");
+            foreach(var p in wallFloor.Positions())
+                wallFloor[p] = TileFactory.Wall(p);
 
-            foreach (var room in roomsContext)
+            foreach (var room in rooms)
             {
                 foreach (var p in room.InteriorPositions())
-                    wallFloor[p] = TileTypes.Floor;
+                    wallFloor[p] = TileFactory.Floor(p);
             }
 
-            foreach (var tunnel in tunnelsContext)
+            foreach (var tunnel in tunnels)
             {
                 foreach (var p in tunnel)
-                    wallFloor[p] = TileTypes.Floor;
+                    wallFloor[p] = TileFactory.Floor(p);
             }
 
             yield return null;

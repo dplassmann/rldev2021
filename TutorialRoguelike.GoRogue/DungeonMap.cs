@@ -14,10 +14,7 @@ namespace TutorialRoguelike.GoRogue
                           int viewWidth,
                           int viewHeight) : base(dungeonWidth, dungeonHeight, 1, Distance.Euclidean, viewSize: (viewWidth, viewHeight))
         {
-            foreach (var location in generator.Tiles.Positions())
-            {
-                SetTerrain(TileFactory.Create(generator.Tiles[location], location));
-            }
+            ApplyTerrainOverlay(generator.Terrain);
         }
 
     }
