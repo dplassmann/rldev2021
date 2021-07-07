@@ -16,5 +16,10 @@ namespace TutorialRoguelike.Manual
             Glyph = glyph;
             DarkGlyph = darkGlyph;
         }
+
+        public Tile Clone()
+        {
+            return new Tile(IsWalkable, IsTransparent, Glyph.Clone(), DarkGlyph.Clone());
+        }
     }
 }

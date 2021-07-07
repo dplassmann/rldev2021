@@ -2,20 +2,24 @@
 using SadConsole;
 using SadRogue.Primitives;
 using TutorialRoguelike.Manual.Entities;
+using TutorialRoguelike.Manual.MapGeneration;
 using Console = SadConsole.Console;
 
 namespace TutorialRoguelike.Manual
 {
     class Program
     {
-        public const int Width = 80;
-        public const int Height = 50;
+        public const int DungeonWidth = 80;
+        public const int DungeonHeight = 45;
+        public const int RoomMinSize = 6;
+        public const int RoomMaxSize = 10;
+        public const int MaxRooms = 30;
 
         public static Engine Engine;
 
         static void Main(string[] args)
         {
-            Game.Create(Width, Height);
+            Game.Create(DungeonWidth, DungeonHeight);
             Settings.WindowTitle = "Yet Another Roguelike Tutorial - Manual Version";
             Game.Instance.OnStart = Init;
             Game.Instance.FrameUpdate += Instance_FrameUpdate;
@@ -30,10 +34,10 @@ namespace TutorialRoguelike.Manual
 
         private static void Init()
         {
-            var player = new Player((Width / 2, Height / 2));
-            var npc = new Entity((Width / 2 - 5, Height / 2), 'n', Colors.Npc);
+            var player = new Player((DungeonWidth / 2, DungeonHeight / 2));
+            var npc = new Entity((DungeonWidth / 2 - 5, DungeonHeight / 2), 'n', Colors.Npc);
             var entities = new HashSet<Entity> { player, npc };
-            var map = new GameMap((Width, Height));
+            var map = MapGenerator.GenerateDungeon(DungeonWidth, DungeonHeight,MaxRooms,RoomMinSize,RoomMaxSize,player);
 
             Engine = new Engine(entities, player, map);
 
