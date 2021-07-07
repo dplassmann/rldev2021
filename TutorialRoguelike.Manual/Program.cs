@@ -19,7 +19,7 @@ namespace TutorialRoguelike.Manual
 
         static void Main(string[] args)
         {
-            Game.Create(DungeonWidth, DungeonHeight);
+            Game.Create(DungeonWidth, DungeonHeight, "Fonts/OneBit.font");
             Settings.WindowTitle = "Yet Another Roguelike Tutorial - Manual Version";
             Game.Instance.OnStart = Init;
             Game.Instance.FrameUpdate += Instance_FrameUpdate;
