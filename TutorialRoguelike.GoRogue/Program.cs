@@ -14,7 +14,7 @@ namespace TutorialRoguelike.GoRogue
 
         static void Main(string[] args)
         {
-            Game.Create(MapSize.X, MapSize.Y);
+            Game.Create(MapSize.X, MapSize.Y, "Fonts/OneBit.font");
             Settings.WindowTitle = "Yet Another Roguelike Tutorial - GoRogue Version";
             Game.Instance.OnStart = Init;
             Game.Instance.Run();

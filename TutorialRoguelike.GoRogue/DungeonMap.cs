@@ -24,8 +24,9 @@ namespace TutorialRoguelike.GoRogue
             foreach (var location in this.Positions())
             {
                 bool walkable = generatedMap[location];
-                Color background = walkable ? Colors.Floor : Colors.Wall;
-                SetTerrain(new RogueLikeCell(location, Color.White, background, ' ', 0, walkable, walkable));
+                Color foreground = walkable ? Colors.Floor : Colors.Wall;
+                int glyph = walkable ? 0 : 826; 
+                SetTerrain(new RogueLikeCell(location, foreground, Colors.Background, glyph, 0, walkable, walkable));
             }
         }
         private class TestWallGenerationStep : GenerationStep
