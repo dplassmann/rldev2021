@@ -23,12 +23,10 @@ namespace TutorialRoguelike.GoRogue
 
             foreach (var location in this.Positions())
             {
-                bool walkable = generatedMap[location];
-                Color foreground = walkable ? Colors.Floor : Colors.Wall;
-                int glyph = walkable ? 0 : 826; 
-                SetTerrain(new RogueLikeCell(location, foreground, Colors.Background, glyph, 0, walkable, walkable));
+                SetTerrain(TileFactory.Get(generatedMap[location] ? TileTypes.Floor : TileTypes.Wall, location));
             }
         }
+
         private class TestWallGenerationStep : GenerationStep
         {
             public TestWallGenerationStep() : base(null, (typeof(ISettableGridView<bool>), WallFloor))
