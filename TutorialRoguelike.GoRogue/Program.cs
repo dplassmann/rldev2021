@@ -1,20 +1,28 @@
 ﻿using SadConsole;
 using SadRogue.Primitives;
 using SadRogue.Integration;
+using TutorialRoguelike.GoRogue.MapGeneration;
+using TutorialRoguelike.GoRogue.Entities;
 
 namespace TutorialRoguelike.GoRogue
 {
     class Program
     {
-        public static readonly Point DungeonSize = (80, 50);
-        public static readonly Point MapSize = (80, 50);
+        public const int DungeonWidth = 80;
+        public const int DungeonHeight = 45;
+        public const int MapWidth = 80;
+        public const int MapHeight = 50;
+
+        public const int MaxRooms = 30;
+        public const int RoomMinSize = 6;
+        public const int RoomMaxSize = 10;
 
         private static Player Player;
         private static DungeonMap DungeonMap;
 
         static void Main(string[] args)
         {
-            Game.Create(MapSize.X, MapSize.Y, "Fonts/OneBit.font");
+            Game.Create(MapWidth, MapHeight, "Fonts/OneBit.font");
             Settings.WindowTitle = "Yet Another Roguelike Tutorial - GoRogue Version";
             Game.Instance.OnStart = Init;
             Game.Instance.Run();
@@ -23,10 +31,11 @@ namespace TutorialRoguelike.GoRogue
 
         private static void Init()
         {
-            DungeonMap = new DungeonMap(DungeonSize, MapSize);
-            Player = new Player(MapSize / 2);
+            var mapGenerator = new MapGenerator(MaxRooms, RoomMinSize, RoomMaxSize, DungeonWidth, DungeonHeight);
+            Player = new Player(mapGenerator.PlayerSpawnPoint);
+            DungeonMap = new DungeonMap(mapGenerator, DungeonWidth, DungeonHeight, MapWidth, MapHeight);
             DungeonMap.AddEntity(Player);
-            DungeonMap.AddEntity(GenerateNpc(Player.Position - (5,0)));
+            //DungeonMap.AddEntity(GenerateNpc(Player.Position - (5,0)));
 
             Game.Instance.Screen = DungeonMap;
         }
