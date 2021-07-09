@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using GoRogue.MapGeneration;
-using SadRogue.Integration;
 using SadRogue.Integration.FieldOfView.Memory;
 using SadRogue.Primitives;
 using SadRogue.Primitives.GridViews;

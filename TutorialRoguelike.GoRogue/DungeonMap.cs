@@ -1,9 +1,7 @@
 ﻿using SadRogue.Integration.FieldOfView.Memory;
 using SadRogue.Integration.Maps;
 using SadRogue.Primitives;
-using SadRogue.Primitives.GridViews;
 using TutorialRoguelike.GoRogue.MapGeneration;
-using TutorialRoguelike.GoRogue.Terrain;
 
 namespace TutorialRoguelike.GoRogue
 {

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using SadRogue.Integration;
 using SadRogue.Integration.FieldOfView.Memory;
 using SadRogue.Primitives;
 
