@@ -14,6 +14,7 @@ namespace TutorialRoguelike.Manual
         public const int RoomMinSize = 6;
         public const int RoomMaxSize = 10;
         public const int MaxRooms = 30;
+        public const int MaxMonstersPerRoom = 2;
 
         public static Engine Engine;
 
@@ -22,29 +23,21 @@ namespace TutorialRoguelike.Manual
             Game.Create(DungeonWidth, DungeonHeight, "Fonts/OneBit.font");
             Settings.WindowTitle = "Yet Another Roguelike Tutorial - Manual Version";
             Game.Instance.OnStart = Init;
-            Game.Instance.FrameUpdate += Instance_FrameUpdate;
             Game.Instance.Run();
             Game.Instance.Dispose();
         }
 
-        private static void Instance_FrameUpdate(object sender, GameHost e)
-        {
-            Engine.Update();
-            Engine.Render((Console) Game.Instance.Screen);
-        }
-
         private static void Init()
         {
-            var player = new Player((DungeonWidth / 2, DungeonHeight / 2));
-            var npc = new Entity((DungeonWidth / 2 - 5, DungeonHeight / 2), 'n', Colors.Npc);
-            var entities = new HashSet<Entity> { player };
-            var map = MapGenerator.GenerateDungeon(DungeonWidth, DungeonHeight,MaxRooms,RoomMinSize,RoomMaxSize,player);
-
-            Engine = new Engine(entities, player, map);
+            var player = EntityFactory.Player;
+            var map = MapGenerator.GenerateDungeon(DungeonWidth, DungeonHeight, MaxRooms, RoomMinSize, RoomMaxSize, MaxMonstersPerRoom, player);
 
             var startingConsole = (Console)GameHost.Instance.Screen;
+            Engine = new Engine(player, map, startingConsole);
+
             startingConsole.IsFocused = true;
             startingConsole.SadComponents.Add(new KeyboardHandler(Engine.HandleAction));
+            Engine.Render();
         }
     }
 }

@@ -5,8 +5,8 @@ namespace TutorialRoguelike.Manual.MapGeneration
 {
     public class RectangularRoom
     {
-        Point MinExtent;
-        Point MaxExtent;
+        public Point MinExtent;
+        public Point MaxExtent;
 
         public RectangularRoom(int x, int y, int width, int height)
         {

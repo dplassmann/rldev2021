@@ -3,55 +3,50 @@ using System.Linq;
 using GoRogue.FOV;
 using SadConsole;
 using SadRogue.Primitives.GridViews;
-using TutorialRoguelike.Actions;
+using TutorialRoguelike.Manual.Actions;
 using TutorialRoguelike.Manual.Entities;
 
 namespace TutorialRoguelike.Manual
 {
     public class Engine
     {
-        public ISet<Entity> Entities;
         public Entity Player;
         public GameMap Map;
+        public Console Console;
 
         private IFOV FOV;
 
-        public Engine(ISet<Entity> entities, Entity player, GameMap map)
+        public Engine(Entity player, GameMap map, Console console)
         {
-            Entities = entities;
             Player = player;
             Map = map;
+            Console = console;
 
             var transparentTiles = new ArrayView<bool>(Map.Tiles.ToArray().Select(t => t.IsTransparent).ToArray(), Map.Width);
             FOV = new RecursiveShadowcastingFOV(transparentTiles);
             UpdateFov();
         }
 
-        public void Update()
+        public void Render()
         {
-            UpdateFov();
-        }
-
-        public void Render(Console console)
-        {
-            console.Clear();
-            Map.Render(console);
-            foreach (var entity in Entities)
-            {
-                if (Map.Visible[entity.Position.X, entity.Position.Y])
-                {
-                    //Force transparency by copying onto cloned map tile
-                    var displayGlyph = Map[entity.Position].Glyph.Clone();
-                    displayGlyph.Foreground = entity.Appearance.Foreground;
-                    displayGlyph.Glyph = entity.Appearance.Glyph;
-                    console.Print(entity.Position.X, entity.Position.Y, displayGlyph);
-                }
-            }
+            Console.Clear();
+            Map.Render(Console);
         }
 
         public void HandleAction(IAction action)
         {
             action.Perform(this, Player);
+            HandleEnemyTurns();
+            UpdateFov();
+            Render();
+        }
+
+        private void HandleEnemyTurns()
+        {
+            foreach (var entity in Map.Entities.Where(e => e != Player))
+            {
+                System.Console.WriteLine($"The {entity.Name} wonders when it will get to take a real turn.");
+            }
         }
 
         private void UpdateFov()

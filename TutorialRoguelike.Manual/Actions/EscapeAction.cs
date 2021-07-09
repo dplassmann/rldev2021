@@ -2,7 +2,7 @@
 using TutorialRoguelike.Manual;
 using TutorialRoguelike.Manual.Entities;
 
-namespace TutorialRoguelike.Actions
+namespace TutorialRoguelike.Manual.Actions
 {
     public class EscapeAction : IAction
     {

@@ -1,7 +1,6 @@
-﻿using TutorialRoguelike.Manual;
-using TutorialRoguelike.Manual.Entities;
+﻿using TutorialRoguelike.Manual.Entities;
 
-namespace TutorialRoguelike.Actions
+namespace TutorialRoguelike.Manual.Actions
 {
     public interface IAction
     {

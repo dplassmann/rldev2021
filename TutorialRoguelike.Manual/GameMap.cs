@@ -2,6 +2,8 @@
 using SadConsole;
 using System.Collections.Generic;
 using SadRogue.Primitives.GridViews;
+using TutorialRoguelike.Manual.Entities;
+using System.Linq;
 
 namespace TutorialRoguelike.Manual
 {
@@ -14,6 +16,8 @@ namespace TutorialRoguelike.Manual
         public ArrayView<bool> Visible;
         public ArrayView<bool> Explored;
 
+        public ISet<Entity> Entities;
+
         public GameMap(Point size)
         {
             Width = size.X;
@@ -21,10 +25,16 @@ namespace TutorialRoguelike.Manual
             Tiles = new ArrayView<Tile>(size.X, size.Y);
             Visible = new ArrayView<bool>(size.X, size.Y);
             Explored = new ArrayView<bool>(size.X, size.Y);
+            Entities = new HashSet<Entity>();
 
             CloneFill(Tiles.Positions(), TileFactory.Wall);
             Visible.Fill(false);
             Explored.Fill(false);
+        }
+
+        public Entity GetBlockingEntityAt(Point position)
+        {
+            return Entities.FirstOrDefault(e => e.Position == position && e.BlocksMovement);
         }
 
         public bool InBounds(Point position)
@@ -41,6 +51,18 @@ namespace TutorialRoguelike.Manual
                     console.Print(p.X, p.Y, Tiles[p].Glyph);
                 else if (Explored[p])
                     console.Print(p.X, p.Y, Tiles[p].DarkGlyph);
+            }
+
+            foreach (var entity in Entities)
+            {
+                if (Visible[entity.Position.X, entity.Position.Y])
+                {
+                    //Force transparency by copying onto cloned map tile
+                    var displayGlyph = Tiles[entity.Position].Glyph.Clone();
+                    displayGlyph.Foreground = entity.Appearance.Foreground;
+                    displayGlyph.Glyph = entity.Appearance.Glyph;
+                    console.Print(entity.Position.X, entity.Position.Y, displayGlyph);
+                }
             }
         }
 

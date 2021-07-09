@@ -4,18 +4,17 @@ using TutorialRoguelike.Manual.Entities;
 
 namespace TutorialRoguelike.Manual.Actions
 {
-    public class MovementAction : ActionWithDirection
+    public class MeleeAction : ActionWithDirection
     {
-        public MovementAction(Point delta) : base(delta) { }
+        public MeleeAction(Point delta) : base(delta) { }
 
         public override void Perform(Engine engine, Entity entity)
         {
             var newPosition = entity.Position + Delta;
-            if (engine.Map.InBounds(newPosition)
-                && engine.Map[newPosition].IsWalkable
-                && engine.Map.GetBlockingEntityAt(newPosition) == null)
+            var target = engine.Map.GetBlockingEntityAt(newPosition);
+            if (target != null)
             {
-                entity.Move(Delta);
+                System.Console.WriteLine($"You kick the {target.Name}, much to its annoyance!");
             }
         }
     }

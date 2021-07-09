@@ -2,7 +2,8 @@
 using SadConsole;
 using SadConsole.Components;
 using SadConsole.Input;
-using TutorialRoguelike.Actions;
+using TutorialRoguelike.Manual.Actions;
+using TutorialRoguelike.Manual.Constants;
 
 namespace TutorialRoguelike.Manual
 {
@@ -21,13 +22,13 @@ namespace TutorialRoguelike.Manual
             handled = false;
 
             if (keyboard.IsKeyPressed(Keys.Left))
-                action = new MovementAction(-1, 0);
+                action = new BumpAction(Directions.Left);
             else if (keyboard.IsKeyPressed(Keys.Right))
-                action = new MovementAction(1, 0);
+                action = new BumpAction(Directions.Right);
             else if (keyboard.IsKeyPressed(Keys.Up))
-                action = new MovementAction(0, -1);
+                action = new BumpAction(Directions.Up);
             else if (keyboard.IsKeyPressed(Keys.Down))
-                action = new MovementAction(0, 1);
+                action = new BumpAction(Directions.Down);
 
             if (keyboard.IsKeyPressed(Keys.Escape))
                 action = new EscapeAction();

@@ -1,6 +1,6 @@
 ﻿using SadRogue.Primitives;
 
-namespace TutorialRoguelike.Manual
+namespace TutorialRoguelike.Manual.Constants
 {
     public class Colors
     {
