@@ -10,16 +10,22 @@ namespace TutorialRoguelike.Manual
         public int Height;
 
         public Tile[,] Tiles;
+        public bool[,] Visible;
+        public bool[,] Explored;
 
         public GameMap(Point size)
         {
             Width = size.X;
             Height = size.Y;
             Tiles = new Tile[size.X, size.Y];
+            Visible = new bool[size.X, size.Y];
+            Explored = new bool[size.X, size.Y];
             for (int i = 0; i < size.X; i++)
             {
                 for (int j = 0; j < size.Y; j++)
                 {
+                    Visible[i, j] = false;
+                    Explored[i, j] = false;
                     Tiles[i,j] = TileFactory.Wall;
                 }
             }
@@ -37,7 +43,10 @@ namespace TutorialRoguelike.Manual
             {
                 for (int j = 0; j < Height; j++)
                 {
-                    console.Print(i, j, Tiles[i, j].Glyph);
+                    if (Visible[i, j])
+                        console.Print(i, j, Tiles[i, j].Glyph);
+                    else if (Explored[i, j])
+                        console.Print(i, j, Tiles[i, j].DarkGlyph);
                 }
             }
         }

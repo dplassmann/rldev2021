@@ -1,4 +1,5 @@
 ﻿using SadConsole;
+using SadRogue.Primitives;
 
 namespace TutorialRoguelike.Manual
 {
@@ -9,17 +10,20 @@ namespace TutorialRoguelike.Manual
         public ColoredGlyph Glyph;
         public ColoredGlyph DarkGlyph;
 
-        public Tile(bool walkable, bool transparent, ColoredGlyph glyph, ColoredGlyph darkGlyph)
+        public Tile(bool walkable, bool transparent, ColoredGlyph glyph)
         {
             IsWalkable = walkable;
             IsTransparent = transparent;
             Glyph = glyph;
-            DarkGlyph = darkGlyph;
+
+            DarkGlyph = glyph.Clone();
+            DarkGlyph.Foreground = DarkGlyph.Foreground.GetDarker();
+            DarkGlyph.Background = DarkGlyph.Background.GetDarker();
         }
 
         public Tile Clone()
         {
-            return new Tile(IsWalkable, IsTransparent, Glyph.Clone(), DarkGlyph.Clone());
+            return new Tile(IsWalkable, IsTransparent, Glyph.Clone());
         }
     }
 }

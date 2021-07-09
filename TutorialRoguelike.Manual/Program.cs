@@ -29,6 +29,7 @@ namespace TutorialRoguelike.Manual
 
         private static void Instance_FrameUpdate(object sender, GameHost e)
         {
+            Engine.Update();
             Engine.Render((Console) Game.Instance.Screen);
         }
 
@@ -36,7 +37,7 @@ namespace TutorialRoguelike.Manual
         {
             var player = new Player((DungeonWidth / 2, DungeonHeight / 2));
             var npc = new Entity((DungeonWidth / 2 - 5, DungeonHeight / 2), 'n', Colors.Npc);
-            var entities = new HashSet<Entity> { player, npc };
+            var entities = new HashSet<Entity> { player };
             var map = MapGenerator.GenerateDungeon(DungeonWidth, DungeonHeight,MaxRooms,RoomMinSize,RoomMaxSize,player);
 
             Engine = new Engine(entities, player, map);
