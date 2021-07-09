@@ -30,7 +30,7 @@ namespace TutorialRoguelike.Manual.MapGeneration
                 if (rooms.Any(r => newRoom.Intersects(r)))
                     continue;
 
-                dungeon.Fill(newRoom.Inner, TileFactory.Floor);
+                dungeon.CloneFill(newRoom.Inner, TileFactory.Floor);
 
                 //If this is the first room, start the player here
                 if (!rooms.Any())
@@ -39,7 +39,7 @@ namespace TutorialRoguelike.Manual.MapGeneration
                 }
                 else //For all other rooms, tunnel to the previous
                 {
-                    dungeon.Fill(TunnelBetween(newRoom.Center, rooms.Last().Center), TileFactory.Floor);
+                    dungeon.CloneFill(TunnelBetween(newRoom.Center, rooms.Last().Center), TileFactory.Floor);
                 }
 
                 //Finally save the new room

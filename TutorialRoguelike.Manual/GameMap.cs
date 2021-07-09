@@ -1,6 +1,7 @@
 ﻿using SadRogue.Primitives;
 using SadConsole;
 using System.Collections.Generic;
+using SadRogue.Primitives.GridViews;
 
 namespace TutorialRoguelike.Manual
 {
@@ -9,26 +10,21 @@ namespace TutorialRoguelike.Manual
         public int Width;
         public int Height;
 
-        public Tile[,] Tiles;
-        public bool[,] Visible;
-        public bool[,] Explored;
+        public ArrayView<Tile> Tiles;
+        public ArrayView<bool> Visible;
+        public ArrayView<bool> Explored;
 
         public GameMap(Point size)
         {
             Width = size.X;
             Height = size.Y;
-            Tiles = new Tile[size.X, size.Y];
-            Visible = new bool[size.X, size.Y];
-            Explored = new bool[size.X, size.Y];
-            for (int i = 0; i < size.X; i++)
-            {
-                for (int j = 0; j < size.Y; j++)
-                {
-                    Visible[i, j] = false;
-                    Explored[i, j] = false;
-                    Tiles[i,j] = TileFactory.Wall;
-                }
-            }
+            Tiles = new ArrayView<Tile>(size.X, size.Y);
+            Visible = new ArrayView<bool>(size.X, size.Y);
+            Explored = new ArrayView<bool>(size.X, size.Y);
+
+            CloneFill(Tiles.Positions(), TileFactory.Wall);
+            Visible.Fill(false);
+            Explored.Fill(false);
         }
 
         public bool InBounds(Point position)
@@ -39,15 +35,12 @@ namespace TutorialRoguelike.Manual
 
         public void Render(Console console)
         {
-            for (int i = 0; i < Width; i++)
+            foreach (Point p in Tiles.Positions())
             {
-                for (int j = 0; j < Height; j++)
-                {
-                    if (Visible[i, j])
-                        console.Print(i, j, Tiles[i, j].Glyph);
-                    else if (Explored[i, j])
-                        console.Print(i, j, Tiles[i, j].DarkGlyph);
-                }
+                if (Visible[p])
+                    console.Print(p.X, p.Y, Tiles[p].Glyph);
+                else if (Explored[p])
+                    console.Print(p.X, p.Y, Tiles[p].DarkGlyph);
             }
         }
 
@@ -62,7 +55,7 @@ namespace TutorialRoguelike.Manual
             set { Tiles[x, y] = value; }
         }
 
-        public void Fill(IEnumerable<Point> area, Tile value)
+        public void CloneFill(IEnumerable<Point> area, Tile value)
         {
             foreach (var p in area)
             {
