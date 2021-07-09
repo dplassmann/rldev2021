@@ -2,6 +2,7 @@
 using System.Linq;
 using GoRogue.MapGeneration;
 using SadRogue.Integration;
+using SadRogue.Integration.FieldOfView.Memory;
 using SadRogue.Primitives;
 using SadRogue.Primitives.GridViews;
 using TutorialRoguelike.GoRogue.Terrain;
@@ -17,7 +18,7 @@ namespace TutorialRoguelike.GoRogue.MapGeneration
             var rooms = context.GetFirst<List<RectangularRoom>>("Rooms");
             var tunnels = context.GetFirst<List<IEnumerable<Point>>>("Tunnels");
 
-            var wallFloor = context.GetFirstOrNew<ISettableGridView<RogueLikeCell>>(() => new ArrayView<RogueLikeCell>(context.Width, context.Height), "WallFloor");
+            var wallFloor = context.GetFirstOrNew<ISettableGridView<MemoryAwareRogueLikeCell>>(() => new ArrayView<MemoryAwareRogueLikeCell>(context.Width, context.Height), "WallFloor");
             foreach(var p in wallFloor.Positions())
                 wallFloor[p] = TileFactory.Wall(p);
 

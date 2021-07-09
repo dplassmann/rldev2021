@@ -35,6 +35,7 @@ namespace TutorialRoguelike.GoRogue
             Player = new Player(mapGenerator.PlayerSpawnPoint);
             DungeonMap = new DungeonMap(mapGenerator, DungeonWidth, DungeonHeight, MapWidth, MapHeight);
             DungeonMap.AddEntity(Player);
+            Player.CalculateFOV();
             //DungeonMap.AddEntity(GenerateNpc(Player.Position - (5,0)));
 
             Game.Instance.Screen = DungeonMap;

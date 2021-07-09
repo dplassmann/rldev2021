@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using SadRogue.Integration;
+using SadRogue.Integration.FieldOfView.Memory;
 using SadRogue.Primitives;
 
 namespace TutorialRoguelike.GoRogue.Terrain
 {
     public class TileFactory
     {
-        public static RogueLikeCell Floor(Point position) => new RogueLikeCell(position, Colors.Floor, Colors.Background, 0, 0, true, true);
-        public static RogueLikeCell Wall(Point position) => new RogueLikeCell(position, Colors.Wall, Colors.Background, 826, 0, false, false);
+        public static MemoryAwareRogueLikeCell Floor(Point position) => new MemoryAwareRogueLikeCell(position, Color.Transparent, Colors.Floor, 0, 0, true, true);
+        public static MemoryAwareRogueLikeCell Wall(Point position) => new MemoryAwareRogueLikeCell(position, Colors.Wall, Color.Transparent, 826, 0, false, false);
 
-        public static RogueLikeCell Create(TileTypes type, Point position) => Generators[type](position);
+        public static MemoryAwareRogueLikeCell Create(TileTypes type, Point position) => Generators[type](position);
 
-        private static Dictionary<TileTypes, Func<Point, RogueLikeCell>> Generators = new Dictionary<TileTypes, Func<Point, RogueLikeCell>>
+        private static Dictionary<TileTypes, Func<Point, MemoryAwareRogueLikeCell>> Generators = new Dictionary<TileTypes, Func<Point, MemoryAwareRogueLikeCell>>
         {
             { TileTypes.Floor, Floor },
             { TileTypes.Wall, Wall }
