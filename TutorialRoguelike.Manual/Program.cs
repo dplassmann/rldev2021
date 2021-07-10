@@ -32,7 +32,13 @@ namespace TutorialRoguelike.Manual
             var player = EntityFactory.Player;
 
             var startingConsole = (Console)GameHost.Instance.Screen;
-            Engine = new Engine(player, startingConsole);
+
+            var infoConsole = new Console(startingConsole.Width, 1);
+            infoConsole.Font = Game.Instance.EmbeddedFont;
+            infoConsole.Position = (0, startingConsole.Height - 1);
+            startingConsole.Children.Add(infoConsole);
+
+            Engine = new Engine(player, startingConsole, infoConsole);
             Engine.Map = MapGenerator.GenerateDungeon(DungeonWidth, DungeonHeight, MaxRooms, RoomMinSize, RoomMaxSize, MaxMonstersPerRoom, Engine);
             Engine.UpdateFov();
 

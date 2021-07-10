@@ -5,6 +5,7 @@ using SadConsole;
 using SadRogue.Primitives.GridViews;
 using TutorialRoguelike.Manual.Actions;
 using TutorialRoguelike.Manual.Entities;
+using static SadConsole.ColoredString;
 
 namespace TutorialRoguelike.Manual
 {
@@ -13,19 +14,22 @@ namespace TutorialRoguelike.Manual
         public Actor Player;
         public GameMap Map;
         public Console Console;
+        public Console InfoConsole;
 
         private IFOV FOV;
 
-        public Engine(Actor player, Console console)
+        public Engine(Actor player, Console console, Console infoConsole)
         {
             Player = player;
             Console = console;
+            InfoConsole = infoConsole;
         }
 
         public void Render()
         {
             Console.Clear();
             Map.Render(Console);
+            InfoConsole.Print(1, 0, $"HP: {Player.Fighter.Hp}/{Player.Fighter.MaxHp}");
         }
 
         public void HandleAction(IAction action)
