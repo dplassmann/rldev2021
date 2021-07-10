@@ -6,15 +6,26 @@ namespace TutorialRoguelike.Manual.Actions
 {
     public class MeleeAction : ActionWithDirection
     {
-        public MeleeAction(Entity entity, Point delta) : base(entity, delta) { }
+        public MeleeAction(Actor entity, Direction direction) : base(entity, direction) { }
 
         public override void Perform()
         {
-            var newPosition = Entity.Position + Delta;
-            var target = Engine.Map.GetBlockingEntityAt(newPosition);
-            if (target != null)
+            if (TargetActor == null)
             {
-                System.Console.WriteLine($"You kick the {target.Name}, much to its annoyance!");
+                return;
+            }
+
+            var damage = Entity.Fighter.Power - TargetActor.Fighter.Defense;
+
+            var attackDescription = $"{Entity.Name} attacks {TargetActor.Name}";
+            if (damage > 0)
+            {
+                System.Console.WriteLine($"{attackDescription} for {damage} hit points.");
+                TargetActor.Fighter.Hp -= damage;
+            }
+            else
+            {
+                System.Console.WriteLine($"{attackDescription} but does no damage.");
             }
         }
     }

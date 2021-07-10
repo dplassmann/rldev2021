@@ -2,15 +2,17 @@
 
 namespace TutorialRoguelike.Manual.Actions
 {
-    public abstract class GameAction
+    public abstract class BaseAction : IAction
     {
-        public Entity Entity;
+        private Actor _entity;
 
         public Engine Engine => Entity.Map.Engine;
 
-        protected GameAction(Entity entity)
+        public Actor Entity { get => _entity; }
+
+        protected BaseAction(Actor entity)
         {
-            Entity = entity;
+            _entity = entity;
         }
 
         public abstract void Perform();

@@ -17,8 +17,22 @@ namespace TutorialRoguelike.Manual
         public ArrayView<bool> Visible;
         public ArrayView<bool> Explored;
 
-        public ISet<Entity> Entities;
-        public Engine Engine;
+        private bool _isWalkableDirty = true;
+        private ArrayView<bool> _walkable;
+        public ArrayView<bool> Walkable { 
+            get { 
+                if (_isWalkableDirty)
+                {
+                    _walkable = new ArrayView<bool>(Tiles.ToArray().Select(t => t.IsWalkable).ToArray(), Width);
+                    _isWalkableDirty = false;
+                }
+                return _walkable; 
+            } 
+        }
+
+        public ISet<Entity> Entities { get; private set; }
+        public Engine Engine { get; private set; }
+        public IEnumerable<Actor> Actors => Entities.Where(e => e is Actor actor && actor.IsAlive).Cast<Actor>();
 
         public GameMap(Point size, Engine engine)
         {
@@ -38,6 +52,11 @@ namespace TutorialRoguelike.Manual
         public Entity GetBlockingEntityAt(Point position)
         {
             return Entities.FirstOrDefault(e => e.Position == position && e.BlocksMovement);
+        }
+
+        public Actor GetActorAt(Point position)
+        {
+            return Actors.FirstOrDefault(e => e.Position == position);
         }
 
         public bool InBounds(Point position)
@@ -72,12 +91,18 @@ namespace TutorialRoguelike.Manual
         public Tile this[Point position]
         {
             get { return Tiles[position.X, position.Y]; }
-            set { Tiles[position.X, position.Y] = value; }
+            set { 
+                Tiles[position.X, position.Y] = value;
+                _isWalkableDirty = true;
+            }
         }
         public Tile this[int x, int y]
         {
             get { return Tiles[x, y]; }
-            set { Tiles[x, y] = value; }
+            set { 
+                Tiles[x, y] = value;
+                _isWalkableDirty = true;
+            }
         }
 
         public void CloneFill(IEnumerable<Point> area, Tile value)
@@ -85,6 +110,7 @@ namespace TutorialRoguelike.Manual
             foreach (var p in area)
             {
                 Tiles[p.X, p.Y] = value.Clone();
+                _isWalkableDirty = true;
             }
         }
     }

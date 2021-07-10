@@ -10,13 +10,13 @@ namespace TutorialRoguelike.Manual
 {
     public class Engine
     {
-        public Entity Player;
+        public Actor Player;
         public GameMap Map;
         public Console Console;
 
         private IFOV FOV;
 
-        public Engine(Entity player, Console console)
+        public Engine(Actor player, Console console)
         {
             Player = player;
             Console = console;
@@ -28,7 +28,7 @@ namespace TutorialRoguelike.Manual
             Map.Render(Console);
         }
 
-        public void HandleAction(GameAction action)
+        public void HandleAction(IAction action)
         {
             action.Perform();
             HandleEnemyTurns();
@@ -38,9 +38,12 @@ namespace TutorialRoguelike.Manual
 
         private void HandleEnemyTurns()
         {
-            foreach (var entity in Map.Entities.Where(e => e != Player))
+            foreach (var actor in Map.Actors.Where(e => e != Player))
             {
-                System.Console.WriteLine($"The {entity.Name} wonders when it will get to take a real turn.");
+                if (actor.AI != null)
+                {
+                    actor.AI.Perform();
+                }
             }
         }
 

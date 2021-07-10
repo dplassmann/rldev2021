@@ -12,10 +12,10 @@ namespace TutorialRoguelike.Manual.Entities
         public string Name;
         public bool BlocksMovement;
 
-        public Entity(ColoredGlyph glyph, string name, bool blocksMovement, GameMap map = null)
+        public Entity(ColoredGlyph appearance, string name, bool blocksMovement, GameMap map = null)
         {
             Position = (0, 0);
-            Appearance = glyph;
+            Appearance = appearance;
             Name = name;
             BlocksMovement = blocksMovement;
             if (map != null)
@@ -23,11 +23,6 @@ namespace TutorialRoguelike.Manual.Entities
                 Map = map;
                 map.Entities.Add(this);
             }
-        }
-
-        public void Move(Point delta)
-        {
-            Position += delta;
         }
 
         public void Place(Point position, GameMap map = null)

@@ -6,17 +6,16 @@ namespace TutorialRoguelike.Manual.Actions
 {
     public class BumpAction : ActionWithDirection
     {
-        public BumpAction(Entity entity, Point delta) : base(entity, delta) { }
+        public BumpAction(Actor entity, Direction direction) : base(entity, direction) { }
 
         public override void Perform()
         {
-            var newPosition = Entity.Position + Delta;
-            if (Engine.Map.GetBlockingEntityAt(newPosition) != null)
+            if (TargetActor != null)
             {
-                new MeleeAction(Entity, Delta).Perform();
+                new MeleeAction(Entity, Direction).Perform();
             } else
             {
-                new MovementAction(Entity, Delta).Perform();
+                new MovementAction(Entity, Direction).Perform();
             }
         }
     }

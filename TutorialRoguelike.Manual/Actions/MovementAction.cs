@@ -6,16 +6,15 @@ namespace TutorialRoguelike.Manual.Actions
 {
     public class MovementAction : ActionWithDirection
     {
-        public MovementAction(Entity entity, Point delta) : base(entity, delta) { }
+        public MovementAction(Actor entity, Direction direction) : base(entity, direction) { }
 
         public override void Perform()
         {
-            var newPosition = Entity.Position + Delta;
-            if (Engine.Map.InBounds(newPosition)
-                && Engine.Map[newPosition].IsWalkable
-                && Engine.Map.GetBlockingEntityAt(newPosition) == null)
+            if (Engine.Map.InBounds(Destination)
+                && Engine.Map[Destination].IsWalkable
+                && Engine.Map.GetBlockingEntityAt(Destination) == null)
             {
-                Entity.Move(Delta);
+                Entity.Position += Direction;
             }
         }
     }

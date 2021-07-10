@@ -5,10 +5,10 @@ namespace TutorialRoguelike.Manual.Terrain
 {
     public class Tile
     {
-        public bool IsWalkable;
-        public bool IsTransparent;
-        public ColoredGlyph Glyph;
-        public ColoredGlyph DarkGlyph;
+        public bool IsWalkable { get; private set; }
+        public bool IsTransparent { get; private set; }
+        public ColoredGlyph Glyph { get; private set; }
+        public ColoredGlyph DarkGlyph { get; private set; }
 
         public Tile(bool walkable, bool transparent, ColoredGlyph glyph)
         {

@@ -4,12 +4,18 @@ using TutorialRoguelike.Manual.Entities;
 
 namespace TutorialRoguelike.Manual.Actions
 {
-    public abstract class ActionWithDirection : GameAction
+    public abstract class ActionWithDirection : BaseAction
     {
-        public Point Delta { get; private set; }
-        public ActionWithDirection(Entity entity, Point delta) : base(entity)
+        public Direction Direction { get; private set; }
+        public ActionWithDirection(Actor entity, Direction direction) : base(entity)
         {
-            Delta = delta;
+            Direction = direction;
         }
+
+        public Point Destination => Entity.Position + Direction;
+
+        public Entity BlockingEntity => Engine.Map.GetBlockingEntityAt(Destination);
+
+        public Actor TargetActor => Engine.Map.GetActorAt(Destination);
     }
 }
