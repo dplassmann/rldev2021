@@ -1,4 +1,4 @@
-﻿namespace TutorialRoguelike.Manual
+﻿namespace TutorialRoguelike.Manual.Constants
 {
     public enum RenderOrder
     {

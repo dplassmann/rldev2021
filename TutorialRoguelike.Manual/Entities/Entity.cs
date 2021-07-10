@@ -1,6 +1,7 @@
 ﻿using System;
 using SadConsole;
 using SadRogue.Primitives;
+using TutorialRoguelike.Manual.Constants;
 
 namespace TutorialRoguelike.Manual.Entities
 {

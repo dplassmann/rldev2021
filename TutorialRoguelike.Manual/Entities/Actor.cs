@@ -1,6 +1,7 @@
 ﻿using SadConsole;
 using TutorialRoguelike.Manual.Components;
 using TutorialRoguelike.Manual.Components.AI;
+using TutorialRoguelike.Manual.Constants;
 
 namespace TutorialRoguelike.Manual.Entities
 {

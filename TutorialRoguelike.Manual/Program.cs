@@ -41,10 +41,11 @@ namespace TutorialRoguelike.Manual
 
             Engine = new Engine(player, startingConsole, infoConsole);
             Engine.Map = MapGenerator.GenerateDungeon(DungeonWidth, DungeonHeight, MaxRooms, RoomMinSize, RoomMaxSize, MaxMonstersPerRoom, Engine);
-            Engine.UpdateFov();
 
             startingConsole.IsFocused = true;
             startingConsole.SadComponents.Add(new KeyboardHandler(Engine));
+
+            Engine.UpdateFov();
             Engine.Render();
         }
     }
