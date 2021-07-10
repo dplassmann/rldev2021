@@ -11,13 +11,15 @@ namespace TutorialRoguelike.Manual.Entities
         public ColoredGlyph Appearance;
         public string Name;
         public bool BlocksMovement;
+        public RenderOrder RenderOrder;
 
-        public Entity(ColoredGlyph appearance, string name, bool blocksMovement, GameMap map = null)
+        public Entity(ColoredGlyph appearance, string name, bool blocksMovement, RenderOrder renderOrder, GameMap map = null)
         {
             Position = (0, 0);
             Appearance = appearance;
             Name = name;
             BlocksMovement = blocksMovement;
+            RenderOrder = renderOrder;
             if (map != null)
             {
                 Map = map;

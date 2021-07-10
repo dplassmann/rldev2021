@@ -30,6 +30,7 @@ namespace TutorialRoguelike.Manual.Entities
             actor.Name = $"remains of {actor.Name}";
             actor.BlocksMovement = false;
             actor.AI = null;
+            actor.RenderOrder = RenderOrder.Corpse;
 
             return actor;
         }

@@ -75,7 +75,7 @@ namespace TutorialRoguelike.Manual
                     console.Print(p.X, p.Y, Tiles[p].DarkGlyph);
             }
 
-            foreach (var entity in Entities)
+            foreach (var entity in Entities.OrderBy(e => e.RenderOrder))
             {
                 if (Visible[entity.Position.X, entity.Position.Y])
                 {

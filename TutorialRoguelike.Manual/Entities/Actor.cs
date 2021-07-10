@@ -9,7 +9,7 @@ namespace TutorialRoguelike.Manual.Entities
         public Fighter Fighter { get; private set; }
         public BaseAI AI { get; set; }
 
-        public Actor(ColoredGlyph appearance, string name, Fighter fighter, GameMap map = null) : base(appearance, name, true, map)
+        public Actor(ColoredGlyph appearance, string name, Fighter fighter, GameMap map = null) : base(appearance, name, true, RenderOrder.Actor, map)
         {
             Fighter = fighter;
             Fighter.Entity = this;
