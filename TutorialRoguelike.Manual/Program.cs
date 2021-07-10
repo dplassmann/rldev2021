@@ -30,13 +30,14 @@ namespace TutorialRoguelike.Manual
         private static void Init()
         {
             var player = EntityFactory.Player;
-            var map = MapGenerator.GenerateDungeon(DungeonWidth, DungeonHeight, MaxRooms, RoomMinSize, RoomMaxSize, MaxMonstersPerRoom, player);
 
             var startingConsole = (Console)GameHost.Instance.Screen;
-            Engine = new Engine(player, map, startingConsole);
+            Engine = new Engine(player, startingConsole);
+            Engine.Map = MapGenerator.GenerateDungeon(DungeonWidth, DungeonHeight, MaxRooms, RoomMinSize, RoomMaxSize, MaxMonstersPerRoom, Engine);
+            Engine.UpdateFov();
 
             startingConsole.IsFocused = true;
-            startingConsole.SadComponents.Add(new KeyboardHandler(Engine.HandleAction));
+            startingConsole.SadComponents.Add(new KeyboardHandler(Engine));
             Engine.Render();
         }
     }

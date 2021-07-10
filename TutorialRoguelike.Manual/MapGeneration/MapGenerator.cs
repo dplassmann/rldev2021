@@ -6,14 +6,15 @@ using SadRogue.Primitives;
 using GoRogue;
 using GoRogue.Random;
 using TutorialRoguelike.Manual.Entities;
+using TutorialRoguelike.Manual.Terrain;
 
 namespace TutorialRoguelike.Manual.MapGeneration
 {
     public class MapGenerator
     {
-        public static GameMap GenerateDungeon(int mapWidth, int mapHeight, int maxRooms, int roomMinSize, int roomMaxSize, int maxMonstersPerRoom, Entity player)
+        public static GameMap GenerateDungeon(int mapWidth, int mapHeight, int maxRooms, int roomMinSize, int roomMaxSize, int maxMonstersPerRoom, Engine engine)
         {
-            var dungeon = new GameMap((mapWidth, mapHeight));
+            var dungeon = new GameMap((mapWidth, mapHeight), engine);
             var rooms = new List<RectangularRoom>();
 
             for (int i = 0; i < maxRooms; i++)
@@ -35,8 +36,7 @@ namespace TutorialRoguelike.Manual.MapGeneration
                 //If this is the first room, start the player here
                 if (!rooms.Any())
                 {
-                    player.Position = newRoom.Center;
-                    dungeon.Entities.Add(player);
+                    engine.Player.Place(newRoom.Center, dungeon);
                 }
                 else //For all other rooms, tunnel to the previous
                 {
@@ -48,7 +48,6 @@ namespace TutorialRoguelike.Manual.MapGeneration
                 //Finally save the new room
                 rooms.Add(newRoom);
             }
-
             return dungeon;
         }
 
@@ -66,12 +65,12 @@ namespace TutorialRoguelike.Manual.MapGeneration
                 {
                     if (GlobalRandom.DefaultRNG.NextDouble() < 0.8)
                     {
-                        EntityFactory.Orc.Spawn(dungeon, position);
+                        EntityFactory.Orc.Place(position, dungeon);
                         continue;
                     }
                     else
                     {
-                        EntityFactory.Troll.Spawn(dungeon, position);
+                        EntityFactory.Troll.Place(position, dungeon);
                         continue;
                     }
                 }

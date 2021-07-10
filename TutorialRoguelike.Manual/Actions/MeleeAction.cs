@@ -6,12 +6,12 @@ namespace TutorialRoguelike.Manual.Actions
 {
     public class MeleeAction : ActionWithDirection
     {
-        public MeleeAction(Point delta) : base(delta) { }
+        public MeleeAction(Entity entity, Point delta) : base(entity, delta) { }
 
-        public override void Perform(Engine engine, Entity entity)
+        public override void Perform()
         {
-            var newPosition = entity.Position + Delta;
-            var target = engine.Map.GetBlockingEntityAt(newPosition);
+            var newPosition = Entity.Position + Delta;
+            var target = Engine.Map.GetBlockingEntityAt(newPosition);
             if (target != null)
             {
                 System.Console.WriteLine($"You kick the {target.Name}, much to its annoyance!");

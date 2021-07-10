@@ -4,14 +4,12 @@ using TutorialRoguelike.Manual.Entities;
 
 namespace TutorialRoguelike.Manual.Actions
 {
-    public abstract class ActionWithDirection : IAction
+    public abstract class ActionWithDirection : GameAction
     {
         public Point Delta { get; private set; }
-        public ActionWithDirection(Point delta)
+        public ActionWithDirection(Entity entity, Point delta) : base(entity)
         {
             Delta = delta;
         }
-
-        public abstract void Perform(Engine engine, Entity entity);
     }
 }

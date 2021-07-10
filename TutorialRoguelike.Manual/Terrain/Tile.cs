@@ -1,7 +1,7 @@
 ﻿using SadConsole;
 using SadRogue.Primitives;
 
-namespace TutorialRoguelike.Manual
+namespace TutorialRoguelike.Manual.Terrain
 {
     public class Tile
     {

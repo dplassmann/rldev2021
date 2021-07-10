@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using SadRogue.Primitives.GridViews;
 using TutorialRoguelike.Manual.Entities;
 using System.Linq;
+using TutorialRoguelike.Manual.Terrain;
 
 namespace TutorialRoguelike.Manual
 {
@@ -17,8 +18,9 @@ namespace TutorialRoguelike.Manual
         public ArrayView<bool> Explored;
 
         public ISet<Entity> Entities;
+        public Engine Engine;
 
-        public GameMap(Point size)
+        public GameMap(Point size, Engine engine)
         {
             Width = size.X;
             Height = size.Y;
@@ -26,6 +28,7 @@ namespace TutorialRoguelike.Manual
             Visible = new ArrayView<bool>(size.X, size.Y);
             Explored = new ArrayView<bool>(size.X, size.Y);
             Entities = new HashSet<Entity>();
+            Engine = engine;
 
             CloneFill(Tiles.Positions(), TileFactory.Wall);
             Visible.Fill(false);

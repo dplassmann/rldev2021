@@ -9,33 +9,33 @@ namespace TutorialRoguelike.Manual
 {
     class KeyboardHandler : KeyboardConsoleComponent
     {
-        public Action<IAction> ActionHandler;
+        private Engine Engine;
 
-        public KeyboardHandler(Action<IAction> actionHandler)
+        public KeyboardHandler(Engine engine) : base()
         {
-            ActionHandler = actionHandler;
+            Engine = engine;
         }
 
         public override void ProcessKeyboard(IScreenObject host, Keyboard keyboard, out bool handled)
         {
-            IAction action = null;
+            Actions.GameAction action = null;
             handled = false;
 
             if (keyboard.IsKeyPressed(Keys.Left))
-                action = new BumpAction(Directions.Left);
+                action = new BumpAction(Engine.Player, Directions.Left);
             else if (keyboard.IsKeyPressed(Keys.Right))
-                action = new BumpAction(Directions.Right);
+                action = new BumpAction(Engine.Player, Directions.Right);
             else if (keyboard.IsKeyPressed(Keys.Up))
-                action = new BumpAction(Directions.Up);
+                action = new BumpAction(Engine.Player, Directions.Up);
             else if (keyboard.IsKeyPressed(Keys.Down))
-                action = new BumpAction(Directions.Down);
+                action = new BumpAction(Engine.Player, Directions.Down);
 
             if (keyboard.IsKeyPressed(Keys.Escape))
-                action = new EscapeAction();
+                action = new EscapeAction(Engine.Player);
 
             if (action != null)
             {
-                ActionHandler(action);
+                Engine.HandleAction(action);
                 handled = true;
             }
         }

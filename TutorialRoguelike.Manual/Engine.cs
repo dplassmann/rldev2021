@@ -16,15 +16,10 @@ namespace TutorialRoguelike.Manual
 
         private IFOV FOV;
 
-        public Engine(Entity player, GameMap map, Console console)
+        public Engine(Entity player, Console console)
         {
             Player = player;
-            Map = map;
             Console = console;
-
-            var transparentTiles = new ArrayView<bool>(Map.Tiles.ToArray().Select(t => t.IsTransparent).ToArray(), Map.Width);
-            FOV = new RecursiveShadowcastingFOV(transparentTiles);
-            UpdateFov();
         }
 
         public void Render()
@@ -33,9 +28,9 @@ namespace TutorialRoguelike.Manual
             Map.Render(Console);
         }
 
-        public void HandleAction(IAction action)
+        public void HandleAction(GameAction action)
         {
-            action.Perform(this, Player);
+            action.Perform();
             HandleEnemyTurns();
             UpdateFov();
             Render();
@@ -49,8 +44,13 @@ namespace TutorialRoguelike.Manual
             }
         }
 
-        private void UpdateFov()
+        public void UpdateFov()
         {
+            if (FOV == null)
+            {
+                var transparentTiles = new ArrayView<bool>(Map.Tiles.ToArray().Select(t => t.IsTransparent).ToArray(), Map.Width);
+                FOV = new RecursiveShadowcastingFOV(transparentTiles);
+            }
             FOV.Calculate(Player.Position, 8);
             Map.Visible.ApplyOverlay(FOV.BooleanResultView);
             Map.Explored.ApplyOverlay(p => Map.Explored[p] | FOV.BooleanResultView[p]);
