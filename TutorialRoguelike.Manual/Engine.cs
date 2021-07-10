@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using GoRogue.FOV;
 using SadConsole;
 using SadRogue.Primitives.GridViews;
-using TutorialRoguelike.Manual.Actions;
 using TutorialRoguelike.Manual.Entities;
-using static SadConsole.ColoredString;
+using TutorialRoguelike.Manual.EventHandlers;
 
 namespace TutorialRoguelike.Manual
 {
@@ -15,6 +13,7 @@ namespace TutorialRoguelike.Manual
         public GameMap Map;
         public Console Console;
         public Console InfoConsole;
+        public EventHandler EventHandler;
 
         private IFOV FOV;
 
@@ -23,6 +22,7 @@ namespace TutorialRoguelike.Manual
             Player = player;
             Console = console;
             InfoConsole = infoConsole;
+            EventHandler = new MainGameEventHandler(this);
         }
 
         public void Render()
@@ -32,15 +32,7 @@ namespace TutorialRoguelike.Manual
             InfoConsole.Print(1, 0, $"HP: {Player.Fighter.Hp}/{Player.Fighter.MaxHp}");
         }
 
-        public void HandleAction(IAction action)
-        {
-            action.Perform();
-            HandleEnemyTurns();
-            UpdateFov();
-            Render();
-        }
-
-        private void HandleEnemyTurns()
+        public void HandleEnemyTurns()
         {
             foreach (var actor in Map.Actors.Where(e => e != Player))
             {

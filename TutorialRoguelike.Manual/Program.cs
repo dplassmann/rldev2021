@@ -2,6 +2,7 @@
 using SadConsole;
 using SadRogue.Primitives;
 using TutorialRoguelike.Manual.Entities;
+using TutorialRoguelike.Manual.EventHandlers;
 using TutorialRoguelike.Manual.MapGeneration;
 using Console = SadConsole.Console;
 

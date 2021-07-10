@@ -26,8 +26,6 @@ namespace TutorialRoguelike.Manual.Components.AI
         //If there is no valid path, returns and empty list
         public IEnumerable<Point> GetPathTo(Point dest)
         {
-            var walkability =Entity.Map.Walkable;
-
             var weights = new ArrayView<double>(Entity.Map.Width, Entity.Map.Height);
             weights.Fill(1);
             foreach (var entity in Entity.Map.Entities.Where(e => e.BlocksMovement))
@@ -39,7 +37,7 @@ namespace TutorialRoguelike.Manual.Components.AI
                 weights[entity.Position] = 10;
             }
 
-            var pathfinder = new AStar(walkability, Distance.Chebyshev, weights, 1);
+            var pathfinder = new AStar(Entity.Map.Walkable, Distance.Chebyshev, weights, 1);
             var path = pathfinder.ShortestPath(Entity.Position, dest);
 
             return path?.Steps ?? new List<Point>();
