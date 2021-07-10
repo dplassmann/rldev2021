@@ -26,11 +26,11 @@ namespace TutorialRoguelike.GoRogue.MapGeneration
 
             for (int i = 0; i < MaxRooms; i++)
             {
-                var width = GlobalRandom.DefaultRNG.Next(RoomMinSize, RoomMaxSize);
-                var height = GlobalRandom.DefaultRNG.Next(RoomMinSize, RoomMaxSize);
+                var width = GlobalRandom.DefaultRNG.Next(RoomMinSize, RoomMaxSize + 1);
+                var height = GlobalRandom.DefaultRNG.Next(RoomMinSize, RoomMaxSize + 1);
 
-                var x = GlobalRandom.DefaultRNG.Next(0, context.Width - width - 1);
-                var y = GlobalRandom.DefaultRNG.Next(0, context.Height - height - 1);
+                var x = GlobalRandom.DefaultRNG.Next(0, context.Width - width);
+                var y = GlobalRandom.DefaultRNG.Next(0, context.Height - height);
 
                 var perimeter = new Rectangle(x, y, width, height);
 

@@ -1,6 +1,7 @@
 ﻿using SadRogue.Integration.FieldOfView.Memory;
 using SadRogue.Integration.Maps;
 using SadRogue.Primitives;
+using TutorialRoguelike.GoRogue.Entities;
 using TutorialRoguelike.GoRogue.MapGeneration;
 
 namespace TutorialRoguelike.GoRogue
@@ -15,6 +16,10 @@ namespace TutorialRoguelike.GoRogue
         {
             AllComponents.Add(new DimmingMemoryFieldOfViewHandler(0.8f));
             ApplyTerrainOverlay(generator.Terrain);
+            foreach (var entity in generator.Entities)
+            {
+                AddEntity(entity);
+            }
         }
 
     }

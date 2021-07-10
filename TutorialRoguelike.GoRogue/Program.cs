@@ -17,8 +17,8 @@ namespace TutorialRoguelike.GoRogue
         public const int RoomMinSize = 6;
         public const int RoomMaxSize = 10;
 
-        private static Player Player;
-        private static DungeonMap DungeonMap;
+        public static Engine Engine;
+
 
         static void Main(string[] args)
         {
@@ -31,19 +31,11 @@ namespace TutorialRoguelike.GoRogue
 
         private static void Init()
         {
-            var mapGenerator = new MapGenerator(MaxRooms, RoomMinSize, RoomMaxSize, DungeonWidth, DungeonHeight);
-            Player = new Player(mapGenerator.PlayerSpawnPoint);
-            DungeonMap = new DungeonMap(mapGenerator, DungeonWidth, DungeonHeight, MapWidth, MapHeight);
-            DungeonMap.AddEntity(Player);
-            Player.CalculateFOV();
-            //DungeonMap.AddEntity(GenerateNpc(Player.Position - (5,0)));
+            var mapGenerator = new MapGenerator(MaxRooms, RoomMinSize, RoomMaxSize, DungeonWidth, DungeonHeight, 2);
+            var dungeonMap = new DungeonMap(mapGenerator, DungeonWidth, DungeonHeight, MapWidth, MapHeight);
+            Engine = new Engine(mapGenerator.Player, dungeonMap);
 
-            Game.Instance.Screen = DungeonMap;
-        }
-
-        private static RogueLikeEntity GenerateNpc(Point position)
-        {
-            return new RogueLikeEntity(position, Colors.Npc, 'n', false);
+            Game.Instance.Screen = Engine;
         }
     }
 }
