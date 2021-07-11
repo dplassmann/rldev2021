@@ -16,7 +16,7 @@ namespace TutorialRoguelike.Entities
             Fighter.Entity = this;
         }
 
-        public bool IsAlive => AI != null; //TODO Is this really doing anything
+        public bool IsAlive => AI != null;
     }
 
     public class Actor<T> : Actor where T : BaseAI
