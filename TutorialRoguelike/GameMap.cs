@@ -10,12 +10,12 @@ namespace TutorialRoguelike
 {
     public class GameMap
     {
-        public int Width;
-        public int Height;
+        public int Width { get; private set; }
+        public int Height { get; private set; }
 
-        public ArrayView<Tile> Tiles;
-        public ArrayView<bool> Visible;
-        public ArrayView<bool> Explored;
+        public ArrayView<Tile> Tiles { get; private set; }
+        public ArrayView<bool> Visible { get; private set; }
+        public ArrayView<bool> Explored { get; private set; }
 
         private bool _isWalkableDirty = true;
         private ArrayView<bool> _walkable;

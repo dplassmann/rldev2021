@@ -7,12 +7,12 @@ namespace TutorialRoguelike.Entities
 {
     public class Entity
     {
-        public GameMap Map;
-        public Point Position;
-        public ColoredGlyph Appearance;
-        public string Name;
-        public bool BlocksMovement;
-        public RenderOrder RenderOrder;
+        public GameMap Map { get; private set; }
+        public Point Position { get; set; }
+        public ColoredGlyph Appearance { get; set; }
+        public string Name { get; set; }
+        public bool BlocksMovement { get; set; }
+        public RenderOrder RenderOrder { get; set; }
 
         public Entity(ColoredGlyph appearance, string name, bool blocksMovement, RenderOrder renderOrder, GameMap map = null)
         {
