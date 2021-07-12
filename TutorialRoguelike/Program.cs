@@ -50,6 +50,7 @@ namespace TutorialRoguelike
 
             startingConsole.IsFocused = true;
             startingConsole.SadComponents.Add(new KeyboardHandler(Engine));
+            startingConsole.SadComponents.Add(new MouseHandler(Engine));
 
             Engine.MessageLog.Add("Hello and welcome, adventurer, to yet another dungeon", Colors.WelcomeText);
 

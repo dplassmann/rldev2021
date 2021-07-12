@@ -13,5 +13,7 @@ namespace TutorialRoguelike.EventHandlers
         public Engine Engine { get; private set; }
 
         public abstract bool ProcessKeyboard(IScreenObject host, Keyboard keyboard);
+
+        public abstract bool ProcessMouse(IScreenObject host, MouseScreenObjectState state);
     }
 }

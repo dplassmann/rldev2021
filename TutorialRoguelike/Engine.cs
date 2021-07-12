@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using GoRogue.FOV;
 using SadConsole;
+using SadRogue.Primitives;
 using SadRogue.Primitives.GridViews;
 using TutorialRoguelike.Entities;
 using TutorialRoguelike.EventHandlers;
@@ -14,6 +15,7 @@ namespace TutorialRoguelike
         public Console Console;
         public InfoPanel InfoConsole;
         public EventHandler EventHandler;
+        public Point MouseLocation;
         public MessageLog MessageLog => InfoConsole.MessageLog;
 
         private IFOV FOV;
@@ -25,6 +27,7 @@ namespace TutorialRoguelike
             Console = console;
             InfoConsole = infoConsole;
             EventHandler = new MainGameEventHandler(this);
+            MouseLocation = (0, 0);
         }
 
         public void Render()

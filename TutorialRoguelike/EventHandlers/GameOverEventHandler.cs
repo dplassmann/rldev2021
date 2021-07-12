@@ -22,6 +22,11 @@ namespace TutorialRoguelike.EventHandlers
             return false;
         }
 
+        public override bool ProcessMouse(IScreenObject host, MouseScreenObjectState state)
+        {
+            return false;
+        }
+
         private bool HandleAction(IAction action)
         {
             action.Perform();
