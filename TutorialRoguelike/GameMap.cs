@@ -79,11 +79,7 @@ namespace TutorialRoguelike
             {
                 if (Visible[entity.Position.X, entity.Position.Y])
                 {
-                    //Force transparency by copying onto cloned map tile
-                    var displayGlyph = Tiles[entity.Position].Glyph.Clone();
-                    displayGlyph.Foreground = entity.Appearance.Foreground;
-                    displayGlyph.Glyph = entity.Appearance.Glyph;
-                    console.Print(entity.Position.X, entity.Position.Y, displayGlyph);
+                    console.Print(entity.Position.X, entity.Position.Y, entity.Appearance.GlyphCharacter.ToString(), entity.Appearance.Foreground);
                 }
             }
         }
