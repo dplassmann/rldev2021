@@ -12,12 +12,14 @@ namespace TutorialRoguelike
         public Actor Player;
         public GameMap Map;
         public Console Console;
-        public Console InfoConsole;
+        public InfoPanel InfoConsole;
         public EventHandler EventHandler;
+        public MessageLog MessageLog => InfoConsole.MessageLog;
 
         private IFOV FOV;
 
-        public Engine(Actor player, Console console, Console infoConsole)
+
+        public Engine(Actor player, Console console, InfoPanel infoConsole)
         {
             Player = player;
             Console = console;
@@ -29,7 +31,7 @@ namespace TutorialRoguelike
         {
             Console.Clear();
             Map.Render(Console);
-            InfoConsole.Print(1, 0, $"HP: {Player.Fighter.Hp}/{Player.Fighter.MaxHp}");
+            InfoConsole.Render();
         }
 
         public void HandleEnemyTurns()

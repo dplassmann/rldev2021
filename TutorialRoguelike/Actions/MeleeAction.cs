@@ -1,5 +1,6 @@
 ﻿using SadRogue.Primitives;
 using TutorialRoguelike;
+using TutorialRoguelike.Constants;
 using TutorialRoguelike.Entities;
 
 namespace TutorialRoguelike.Actions
@@ -18,14 +19,15 @@ namespace TutorialRoguelike.Actions
             var damage = Entity.Fighter.Power - TargetActor.Fighter.Defense;
 
             var attackDescription = $"{Entity.Name} attacks {TargetActor.Name}";
+            var attackColor = Entity == Engine.Player ? Colors.PlayerAttack : Colors.EnemyAttack;
             if (damage > 0)
             {
-                System.Console.WriteLine($"{attackDescription} for {damage} hit points.");
+                Engine.MessageLog.Add($"{attackDescription} for {damage} hit points.", attackColor);
                 TargetActor.Fighter.Hp -= damage;
             }
             else
             {
-                System.Console.WriteLine($"{attackDescription} but does no damage.");
+                Engine.MessageLog.Add($"{attackDescription} but does no damage.", attackColor);
             }
         }
     }

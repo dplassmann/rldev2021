@@ -1,5 +1,6 @@
 ﻿using System;
 using SadConsole;
+using TutorialRoguelike.Constants;
 using TutorialRoguelike.Entities;
 using TutorialRoguelike.EventHandlers;
 
@@ -40,6 +41,7 @@ namespace TutorialRoguelike.Components
         private void Die()
         {
             string deathMessage;
+            var deathColor = Entity == Engine.Player ? Colors.PlayerDie : Colors.EnemyDie;
             if (Entity == Engine.Player)
             {
                 deathMessage = "You died!";
@@ -49,7 +51,7 @@ namespace TutorialRoguelike.Components
                 deathMessage = $"{Entity.Name} is dead!";
             }
             Entity = EntityFactory.Corpse(Actor);
-            System.Console.WriteLine(deathMessage);
+            Engine.MessageLog.Add(deathMessage, deathColor);
         }
 
     }

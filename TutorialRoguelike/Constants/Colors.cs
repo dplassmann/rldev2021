@@ -4,9 +4,25 @@ namespace TutorialRoguelike.Constants
 {
     public class Colors
     {
+        //Entities
         public static readonly Color Player = Color.White;
         public static readonly Color Npc = Color.Yellow;
+        
+        //Terrain
         public static readonly Color Floor = new Color(50, 50, 50);
         public static readonly Color Wall = Color.Gray;
+
+        //Text
+        public static readonly Color PlayerAttack = new Color(0xE0, 0xE0, 0xE0);
+        public static readonly Color EnemyAttack = new Color(0xFF, 0xC0, 0xC0);
+
+        public static readonly Color PlayerDie = new Color(0xFF, 0x30, 0x30);
+        public static readonly Color EnemyDie = new Color(0xFF, 0xA0, 0x30);
+
+        public static readonly Color WelcomeText = new Color(0x20, 0xA0, 0xFF);
+
+        public static readonly Color BarText = Color.White;
+        public static readonly Color BarFilled = Color.Green;
+        public static readonly Color BarEmpty = Color.DarkRed;
     }
 }

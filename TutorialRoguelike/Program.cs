@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using SadConsole;
 using SadRogue.Primitives;
+using TutorialRoguelike.Constants;
 using TutorialRoguelike.Entities;
 using TutorialRoguelike.EventHandlers;
 using TutorialRoguelike.MapGeneration;
@@ -17,11 +18,17 @@ namespace TutorialRoguelike
         public const int MaxRooms = 30;
         public const int MaxMonstersPerRoom = 2;
 
+        public const int InfoPanelWidth = DungeonWidth;
+        public const int InfoPanelHeight = 5;
+
         public static Engine Engine;
+
+        public const int WindowWidth = DungeonWidth;
+        public const int WindowHeight = DungeonHeight + InfoPanelHeight;
 
         static void Main(string[] args)
         {
-            Game.Create(DungeonWidth, DungeonHeight, "Fonts/OneBit.font");
+            Game.Create(WindowWidth, WindowHeight, "Fonts/OneBit.font");
             Settings.WindowTitle = "Yet Another Roguelike Tutorial - Manual Version";
             Game.Instance.OnStart = Init;
             Game.Instance.Run();
@@ -34,9 +41,8 @@ namespace TutorialRoguelike
 
             var startingConsole = (Console)GameHost.Instance.Screen;
 
-            var infoConsole = new Console(startingConsole.Width, 1);
-            infoConsole.Font = Game.Instance.EmbeddedFont;
-            infoConsole.Position = (0, startingConsole.Height - 1);
+            var infoConsole = new InfoPanel(InfoPanelWidth, InfoPanelHeight, player);
+            infoConsole.Position = (0, DungeonHeight);
             startingConsole.Children.Add(infoConsole);
 
             Engine = new Engine(player, startingConsole, infoConsole);
@@ -44,6 +50,8 @@ namespace TutorialRoguelike
 
             startingConsole.IsFocused = true;
             startingConsole.SadComponents.Add(new KeyboardHandler(Engine));
+
+            Engine.MessageLog.Add("Hello and welcome, adventurer, to yet another dungeon", Colors.WelcomeText);
 
             Engine.UpdateFov();
             Engine.Render();
