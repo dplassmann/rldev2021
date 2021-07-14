@@ -46,7 +46,7 @@ namespace TutorialRoguelike.EventHandlers
             {
                 if (keyboard.IsKeyPressed(movement.Key))
                 {
-                    return HandleTurnAction(new BumpAction(Engine.Player, movement.Value));
+                    return HandleAction(new BumpAction(Engine.Player, movement.Value));
                 }
             }
 
@@ -54,32 +54,27 @@ namespace TutorialRoguelike.EventHandlers
             {
                 if (keyboard.IsKeyPressed(key))
                 {
-                    return HandleTurnAction(new WaitAction(Engine.Player));
+                    return HandleAction(new WaitAction(Engine.Player));
                 }
             }
 
+            if (keyboard.IsKeyPressed(Keys.V))
+            {
+                Engine.EventHandler = new HistoryViewer(Engine);
+            }
+
             if (keyboard.IsKeyPressed(Keys.Escape))
-                return HandleTurnAction(new EscapeAction(Engine.Player));
+                return HandleAction(new EscapeAction(Engine.Player));
 
             return false;
         }
 
-        private bool HandleTurnAction(IAction action)
+        private bool HandleAction(IAction action)
         {
             if (action != null)
                 action.Perform();
             Engine.HandleEnemyTurns();
             Engine.UpdateFov();
-            Engine.Render();
-
-            return true;
-        }
-
-        private bool HandleNonTurnAction(IAction action = null)
-        {
-            if (action != null)
-                action.Perform();
-            Engine.Render();
 
             return true;
         }
@@ -89,7 +84,7 @@ namespace TutorialRoguelike.EventHandlers
             if (Engine.Map.InBounds(state.CellPosition))
             {
                 Engine.MouseLocation = state.CellPosition;
-                return HandleNonTurnAction();
+                return true;
             }
 
             return false;

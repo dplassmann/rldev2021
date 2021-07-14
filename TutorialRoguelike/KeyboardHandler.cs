@@ -20,6 +20,7 @@ namespace TutorialRoguelike
         public override void ProcessKeyboard(IScreenObject host, Keyboard keyboard, out bool handled)
         {
             handled = Engine.EventHandler.ProcessKeyboard(host, keyboard);
+            Engine.EventHandler.Render();
         }
     }
 }

@@ -15,5 +15,10 @@ namespace TutorialRoguelike.EventHandlers
         public abstract bool ProcessKeyboard(IScreenObject host, Keyboard keyboard);
 
         public abstract bool ProcessMouse(IScreenObject host, MouseScreenObjectState state);
+
+        public virtual void Render()
+        {
+            Engine.Render();
+        }
     }
 }

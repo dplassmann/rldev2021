@@ -30,7 +30,6 @@ namespace TutorialRoguelike.EventHandlers
         private bool HandleAction(IAction action)
         {
             action.Perform();
-            Engine.Render();
 
             return true;
         }

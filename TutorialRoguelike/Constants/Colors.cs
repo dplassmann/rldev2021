@@ -24,5 +24,9 @@ namespace TutorialRoguelike.Constants
         public static readonly Color BarText = Color.White;
         public static readonly Color BarFilled = Color.Green;
         public static readonly Color BarEmpty = Color.DarkRed;
+
+        public static readonly Color ExtendedMessageLogFrame = Color.OliveDrab;
+        public static readonly Color ExtendedMessageLogTitleText = Color.White;
+
     }
 }

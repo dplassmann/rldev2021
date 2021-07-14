@@ -27,13 +27,17 @@ namespace TutorialRoguelike
             else
                 Messages.Add(new Message(text, color));
         }
-
         public void Render(SadConsole.Console console, int x, int y, int width, int height)
+        {
+            Render(console, x, y, width, height, Messages);
+        }
+
+        public void Render(SadConsole.Console console, int x, int y, int width, int height, IEnumerable<Message> messages)
         {
             int yOffset = height - 1;
 
             //Render messages from last to first, until we run out of space
-            foreach (var message in Messages.Reverse())
+            foreach (var message in messages.Reverse())
             {
                 foreach (var line in Wrap(message.FullText, width).Reverse())
                 {

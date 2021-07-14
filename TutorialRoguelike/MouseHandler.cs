@@ -21,6 +21,7 @@ namespace TutorialRoguelike
                 handled = Engine.EventHandler.ProcessMouse(host, state);
             else
                 handled = false;
+            Engine.EventHandler.Render();
         }
     }
 }
