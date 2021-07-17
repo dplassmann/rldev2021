@@ -86,8 +86,10 @@ namespace TutorialRoguelike.MapGeneration
                 if (!dungeon.Entities.Any(e => e.Position == position))
                 {
                     var itemChance = GlobalRandom.DefaultRNG.NextDouble();
-                    if (itemChance < 0.7)
+                    if (itemChance < 0.2)
                         EntityFactory.HealthPotion.Place(position, dungeon);
+                    else if (itemChance < 0.9)
+                        EntityFactory.ConfusionScroll.Place(position, dungeon);
                     else
                         EntityFactory.LightningScroll.Place(position, dungeon);
                 }

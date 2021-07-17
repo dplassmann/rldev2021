@@ -44,7 +44,7 @@ namespace TutorialRoguelike.EventHandlers
         {
             if (base.HandleAction(action))
             {
-                ResetEventHandler();
+                TransitionTo(new MainGameEventHandler(Engine));
                 return true;
             }
             return false;
@@ -55,13 +55,8 @@ namespace TutorialRoguelike.EventHandlers
         // By default this returns to the main event handler
         public bool Exit()
         {
-            ResetEventHandler();
+            TransitionTo(new MainGameEventHandler(Engine));
             return false;
-        }
-
-        public virtual void ResetEventHandler()
-        {
-            Engine.EventHandler = new MainGameEventHandler(Engine);
         }
     }
 }

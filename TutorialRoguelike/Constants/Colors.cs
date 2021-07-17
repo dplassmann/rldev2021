@@ -9,6 +9,7 @@ namespace TutorialRoguelike.Constants
         public static readonly Color Orc = Color.Green;
         public static readonly Color HealthPotion = Color.DarkViolet;
         public static readonly Color LightningScroll = Color.Yellow;
+        public static readonly Color ConfusionScroll = Color.BlueViolet;
 
         //Terrain
         public static readonly Color Floor = new Color(50, 50, 50);

@@ -37,6 +37,10 @@ namespace TutorialRoguelike.Entities
             appearance: new ColoredGlyph(Colors.LightningScroll, Color.Transparent, 753), 
             name: "Lightning Scroll", 
             consumable: new LightningDamageConsumable(damage: 20, maximumRange: 5));
+        public static Item ConfusionScroll => new Item(
+            appearance: new ColoredGlyph(Colors.ConfusionScroll, Color.Transparent, 753),
+            name: "Confusion Scroll",
+            consumable: new ConfusionConsumable(numberOfTurns: 10));
 
         public static Actor Corpse(Actor actor)
         {

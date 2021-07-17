@@ -76,27 +76,33 @@ namespace TutorialRoguelike.EventHandlers
 
         public virtual bool HandleAction(IAction action)
         {
-            if (action != null)
+            if (action == null)
             {
-                try
-                {
-                    action.Perform();
-                }
-                catch (ImpossibleException ex)
-                {
-                    Engine.MessageLog.Add(ex.Message, Colors.Impossible);
-                    return false;
-                }
+                return false;
             }
-            Engine.HandleEnemyTurns();
-            Engine.UpdateFov();
 
-            return true;
+            try
+            {
+                action.Perform();
+                Engine.HandleEnemyTurns();
+                Engine.UpdateFov();
+                return true;
+            }
+            catch (ImpossibleException ex)
+            {
+                Engine.MessageLog.Add(ex.Message, Colors.Impossible);
+                return false;
+            }
         }
 
         public virtual void Render()
         {
             Engine.Render();
+        }
+
+        public virtual void TransitionTo(EventHandler newHandler)
+        {
+            Engine.EventHandler = newHandler;
         }
     }
 }

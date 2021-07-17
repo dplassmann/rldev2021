@@ -54,10 +54,10 @@ namespace TutorialRoguelike.EventHandlers
 
         }
 
-        public override void ResetEventHandler()
+        public override void TransitionTo(EventHandler newHandler)
         {
             Console.Parent = null;
-            base.ResetEventHandler();
+            base.TransitionTo(newHandler);
         }
 
         public override bool ProcessKeyboard(IScreenObject host, Keyboard keyboard)
