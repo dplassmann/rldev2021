@@ -13,7 +13,7 @@ namespace TutorialRoguelike.Entities
         public Actor(ColoredGlyph appearance, string name, Fighter fighter, GameMap map = null) : base(appearance, name, true, RenderOrder.Actor, map)
         {
             Fighter = fighter;
-            Fighter.Entity = this;
+            Fighter.Parent = this;
         }
 
         public bool IsAlive => AI != null;

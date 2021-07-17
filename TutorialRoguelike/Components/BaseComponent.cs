@@ -7,10 +7,10 @@ namespace TutorialRoguelike.Components
 {
     public abstract class BaseComponent
     {
-        private Entity _entity;
-        public Entity Entity { get => _entity; set => _entity = value; }
+        private Entity _parent;
+        public Entity Parent { get => _parent; set => _parent = value; }
 
-        public GameMap Map => Entity.Map;
+        public GameMap Map => Parent.Map;
 
         public Engine Engine => Map.Engine;
 
@@ -20,7 +20,7 @@ namespace TutorialRoguelike.Components
 
         protected BaseComponent(Entity entity)
         {
-            _entity = entity;
+            _parent = entity;
         }
     }
 }

@@ -33,6 +33,7 @@ namespace TutorialRoguelike
         public ISet<Entity> Entities { get; private set; }
         public Engine Engine { get; private set; }
         public IEnumerable<Actor> Actors => Entities.Where(e => e is Actor actor && actor.IsAlive).Cast<Actor>();
+        public GameMap Map => this;
 
         public GameMap(Point size, Engine engine)
         {

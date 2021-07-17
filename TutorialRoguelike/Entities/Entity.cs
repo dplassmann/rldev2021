@@ -7,12 +7,13 @@ namespace TutorialRoguelike.Entities
 {
     public class Entity
     {
-        public GameMap Map { get; private set; }
+        public GameMap Parent { get; private set; }
         public Point Position { get; set; }
         public ColoredGlyph Appearance { get; set; }
         public string Name { get; set; }
         public bool BlocksMovement { get; set; }
         public RenderOrder RenderOrder { get; set; }
+        public GameMap Map => Parent.Map;
 
         public Entity(ColoredGlyph appearance, string name, bool blocksMovement, RenderOrder renderOrder, GameMap map = null)
         {
@@ -23,7 +24,7 @@ namespace TutorialRoguelike.Entities
             RenderOrder = renderOrder;
             if (map != null)
             {
-                Map = map;
+                Parent = map;
                 map.Entities.Add(this);
             }
         }
@@ -33,10 +34,10 @@ namespace TutorialRoguelike.Entities
             Position = position;
             if (map != null)
             {
-                if (Map != null)
-                    Map.Entities.Remove(this);
-                Map = map;
-                Map.Entities.Add(this);
+                if (Parent != null)
+                    Parent.Entities.Remove(this);
+                Parent = map;
+                Parent.Entities.Add(this);
             }
         }
     }

@@ -28,7 +28,7 @@ namespace TutorialRoguelike.Components
 
         public int Power { get; private set; }
 
-        public Actor Actor { get => (Actor) Entity; }
+        public Actor Actor { get => (Actor) Parent; }
 
         public Fighter(int hp, int defense, int power) : base()
         {
@@ -41,16 +41,16 @@ namespace TutorialRoguelike.Components
         private void Die()
         {
             string deathMessage;
-            var deathColor = Entity == Engine.Player ? Colors.PlayerDie : Colors.EnemyDie;
-            if (Entity == Engine.Player)
+            var deathColor = Parent == Engine.Player ? Colors.PlayerDie : Colors.EnemyDie;
+            if (Parent == Engine.Player)
             {
                 deathMessage = "You died!";
                 Engine.EventHandler = new GameOverEventHandler(Engine);
             } else
             {
-                deathMessage = $"{Entity.Name} is dead!";
+                deathMessage = $"{Parent.Name} is dead!";
             }
-            Entity = EntityFactory.Corpse(Actor);
+            Parent = EntityFactory.Corpse(Actor);
             Engine.MessageLog.Add(deathMessage, deathColor);
         }
 
