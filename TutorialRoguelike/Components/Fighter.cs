@@ -38,6 +38,22 @@ namespace TutorialRoguelike.Components
             Power = power;
         }
 
+        public int Heal(int amount)
+        {
+            if (Hp == MaxHp)
+                return 0;
+
+            var newHp = Math.Min(Hp + amount, MaxHp);
+            var amountRecovered = newHp - Hp;
+            Hp = newHp;
+            return amountRecovered;            
+        }
+
+        public void TakeDamage(int amount)
+        {
+            Hp -= amount;
+        }
+
         private void Die()
         {
             string deathMessage;

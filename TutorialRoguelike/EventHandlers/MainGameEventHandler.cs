@@ -5,6 +5,7 @@ using SadConsole;
 using SadConsole.Input;
 using SadRogue.Primitives;
 using TutorialRoguelike.Actions;
+using TutorialRoguelike.Constants;
 
 namespace TutorialRoguelike.EventHandlers
 {
@@ -61,22 +62,13 @@ namespace TutorialRoguelike.EventHandlers
             if (keyboard.IsKeyPressed(Keys.V))
             {
                 Engine.EventHandler = new HistoryViewer(Engine);
+                return true;
             }
 
             if (keyboard.IsKeyPressed(Keys.Escape))
                 return HandleAction(new EscapeAction(Engine.Player));
 
             return false;
-        }
-
-        private bool HandleAction(IAction action)
-        {
-            if (action != null)
-                action.Perform();
-            Engine.HandleEnemyTurns();
-            Engine.UpdateFov();
-
-            return true;
         }
 
         public override bool ProcessMouse(IScreenObject host, MouseScreenObjectState state)

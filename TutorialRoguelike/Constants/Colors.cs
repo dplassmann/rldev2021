@@ -19,7 +19,12 @@ namespace TutorialRoguelike.Constants
         public static readonly Color PlayerDie = new Color(0xFF, 0x30, 0x30);
         public static readonly Color EnemyDie = new Color(0xFF, 0xA0, 0x30);
 
+        public static readonly Color Invalid = Color.Yellow;
+        public static readonly Color Impossible = Color.Gray;
+        public static readonly Color Error = Color.OrangeRed;
+
         public static readonly Color WelcomeText = new Color(0x20, 0xA0, 0xFF);
+        public static readonly Color HealthRecovered = Color.Lime;
 
         public static readonly Color BarText = Color.White;
         public static readonly Color BarFilled = Color.Green;

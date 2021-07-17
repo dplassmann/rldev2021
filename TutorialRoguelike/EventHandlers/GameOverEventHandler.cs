@@ -27,7 +27,7 @@ namespace TutorialRoguelike.EventHandlers
             return false;
         }
 
-        private bool HandleAction(IAction action)
+        public override bool HandleAction(IAction action)
         {
             action.Perform();
 

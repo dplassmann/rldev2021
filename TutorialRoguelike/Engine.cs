@@ -43,7 +43,10 @@ namespace TutorialRoguelike
             {
                 if (actor.IsAlive)
                 {
-                    actor.AI.Perform();
+                    try
+                    {
+                        actor.AI.Perform();
+                    } catch (ImpossibleException) { }  //Ignore impossible action exceptions by the AI
                 }
             }
         }

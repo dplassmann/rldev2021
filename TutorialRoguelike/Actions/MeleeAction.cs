@@ -13,7 +13,7 @@ namespace TutorialRoguelike.Actions
         {
             if (TargetActor == null)
             {
-                return;
+                throw new ImpossibleException("Nothing to Attack");
             }
 
             var damage = Entity.Fighter.Power - TargetActor.Fighter.Defense;

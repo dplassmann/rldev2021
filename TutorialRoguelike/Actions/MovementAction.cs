@@ -15,6 +15,9 @@ namespace TutorialRoguelike.Actions
                 && Engine.Map.GetBlockingEntityAt(Destination) == null)
             {
                 Entity.Position += Direction;
+            } else
+            {
+                throw new ImpossibleException("That way is blocked.");
             }
         }
     }
