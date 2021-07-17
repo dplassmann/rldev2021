@@ -1,4 +1,7 @@
-﻿using SadRogue.Primitives;
+﻿using System;
+using System.Linq;
+using GoRogue.Random;
+using SadRogue.Primitives;
 using TutorialRoguelike.Actions;
 using TutorialRoguelike.Entities;
 
@@ -27,7 +30,9 @@ namespace TutorialRoguelike.AI
             } 
             else
             {
-                var direction = Extensions.RandomChoice<Direction.Types>();
+                var directions = Enum.GetValues(typeof(Direction.Types)).OfType<Direction.Types>().Where(d => d != Direction.Types.None).ToArray();
+                var index = GlobalRandom.DefaultRNG.Next(directions.Length);
+                var direction = directions[index];
                 TurnsRemaining -= 1;
 
                 // The actor will either try to move or attack in the chosen random direction.
