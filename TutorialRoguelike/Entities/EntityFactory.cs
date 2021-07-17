@@ -11,18 +11,25 @@ namespace TutorialRoguelike.Entities
 {
     public class EntityFactory
     {
+        // Actors
         public static Actor Player => new Actor<BaseAI>(
                 appearance: new ColoredGlyph(Colors.Player, Color.Transparent, (char)25), 
                 name: "Player", 
-                fighter: new Fighter(hp: 30, defense: 2, power: 5));
+                fighter: new Fighter(hp: 30, defense: 2, power: 5),
+                inventory: new Inventory(26));
         public static Actor Orc => new Actor<HostileEnemy>(
-                appearance: new ColoredGlyph(new Color(63, 127, 63), Color.Transparent, (char)121),
+                appearance: new ColoredGlyph(Colors.Orc, Color.Transparent, (char)121),
                 name: "Orc",
-                fighter: new Fighter(hp: 10, defense: 0, power: 3));
+                fighter: new Fighter(hp: 10, defense: 0, power: 3),
+                inventory: new Inventory(0));
         public static Actor Troll => new Actor<HostileEnemy>(
-                appearance: new ColoredGlyph(Color.Green, Color.Transparent, (char)414),
+                appearance: new ColoredGlyph(Colors.Orc, Color.Transparent, (char)414),
                 name: "Troll",
-                fighter: new Fighter(hp: 16, defense: 1, power: 4));
+                fighter: new Fighter(hp: 16, defense: 1, power: 4),
+                inventory: new Inventory(0));
+
+        //Items
+        public static Item HealthPotion => new Item(new ColoredGlyph(Colors.HealthPotion, Color.Transparent, 569), "Health Potion", new HealingConsumable(amount: 4));
 
         public static Actor Corpse(Actor actor)
         {

@@ -17,6 +17,7 @@ namespace TutorialRoguelike
         public const int RoomMaxSize = 10;
         public const int MaxRooms = 30;
         public const int MaxMonstersPerRoom = 2;
+        public const int MaxItemsPerRoom = 2;
 
         public const int InfoPanelWidth = DungeonWidth;
         public const int InfoPanelHeight = 5;
@@ -46,7 +47,7 @@ namespace TutorialRoguelike
             startingConsole.Children.Add(infoConsole);
 
             Engine = new Engine(player, startingConsole, infoConsole);
-            Engine.Map = MapGenerator.GenerateDungeon(DungeonWidth, DungeonHeight, MaxRooms, RoomMinSize, RoomMaxSize, MaxMonstersPerRoom, Engine);
+            Engine.Map = MapGenerator.GenerateDungeon(DungeonWidth, DungeonHeight, MaxRooms, RoomMinSize, RoomMaxSize, MaxMonstersPerRoom, MaxItemsPerRoom, Engine);
 
             startingConsole.IsFocused = true;
             startingConsole.SadComponents.Add(new KeyboardHandler(Engine));

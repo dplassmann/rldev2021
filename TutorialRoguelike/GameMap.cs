@@ -8,7 +8,7 @@ using TutorialRoguelike.Terrain;
 
 namespace TutorialRoguelike
 {
-    public class GameMap
+    public class GameMap : EntityContainer
     {
         public int Width { get; private set; }
         public int Height { get; private set; }
@@ -30,9 +30,10 @@ namespace TutorialRoguelike
             } 
         }
 
-        public ISet<Entity> Entities { get; private set; }
+        public IList<Entity> Entities { get; private set; }
         public Engine Engine { get; private set; }
         public IEnumerable<Actor> Actors => Entities.Where(e => e is Actor actor && actor.IsAlive).Cast<Actor>();
+        public IEnumerable<Item> Items => Entities.Where(e => e is Item).Cast<Item>();
         public GameMap Map => this;
 
         public GameMap(Point size, Engine engine)
@@ -42,7 +43,7 @@ namespace TutorialRoguelike
             Tiles = new ArrayView<Tile>(size.X, size.Y);
             Visible = new ArrayView<bool>(size.X, size.Y);
             Explored = new ArrayView<bool>(size.X, size.Y);
-            Entities = new HashSet<Entity>();
+            Entities = new List<Entity>();
             Engine = engine;
 
             CloneFill(Tiles.Positions(), TileFactory.Wall);
