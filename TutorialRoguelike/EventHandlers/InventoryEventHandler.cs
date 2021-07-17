@@ -28,8 +28,8 @@ namespace TutorialRoguelike.EventHandlers
             Console.Position = (x, y);
             Engine.Console.Children.Add(Console);
 
-            Console.DrawBox(new Rectangle(0, 0, width, height), new ColoredGlyph(Color.Black, Color.White), new ColoredGlyph(Color.White, Color.Black), ICellSurface.ConnectedLineThinExtended);
-            Console.Print(0, 0, Title.Align(HorizontalAlignment.Center, width));
+            Console.DrawBox(new Rectangle(0, 0, width, height), new ColoredGlyph(Color.White, Color.Black), new ColoredGlyph(Color.White, Color.Black), ICellSurface.ConnectedLineThin);
+            Console.Print(1, 0, Title.Align(HorizontalAlignment.Center, width-2, (char)ICellSurface.ConnectedLineThin[(int)ICellSurface.ConnectedLineIndex.Top]), Color.White, Color.Black);
 
             if (numberOfItemsInInventory > 0)
             {
@@ -41,7 +41,7 @@ namespace TutorialRoguelike.EventHandlers
             }
             else
             {
-                Console.Print(x + 1, y + 1, "(Empty)");
+                Console.Print(1, 1, "(Empty)");
             }
         }
 
