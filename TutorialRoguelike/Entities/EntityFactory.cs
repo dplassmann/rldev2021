@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using SadConsole;
 using SadRogue.Primitives;
+using TutorialRoguelike.AI;
 using TutorialRoguelike.Components;
-using TutorialRoguelike.Components.AI;
 using TutorialRoguelike.Constants;
 
 namespace TutorialRoguelike.Entities

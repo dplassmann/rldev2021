@@ -7,7 +7,7 @@ using GoRogue.Pathing;
 using TutorialRoguelike.Actions;
 using TutorialRoguelike.Entities;
 
-namespace TutorialRoguelike.Components.AI
+namespace TutorialRoguelike.AI
 {
     public class BaseAI : IAction
     {

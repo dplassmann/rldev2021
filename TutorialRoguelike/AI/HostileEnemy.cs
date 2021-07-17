@@ -5,7 +5,7 @@ using SadRogue.Primitives;
 using TutorialRoguelike.Actions;
 using TutorialRoguelike.Entities;
 
-namespace TutorialRoguelike.Components.AI
+namespace TutorialRoguelike.AI
 {
     public class HostileEnemy : BaseAI
     {
@@ -27,7 +27,7 @@ namespace TutorialRoguelike.Components.AI
             {
                 if (distance <= 1)
                 {
-                    new MeleeAction((Actor) Entity, Direction.GetDirection(delta)).Perform();
+                    new MeleeAction(Entity, Direction.GetDirection(delta)).Perform();
                     return;
                 }
                 Path = GetPathTo(target.Position);
@@ -35,11 +35,11 @@ namespace TutorialRoguelike.Components.AI
 
             if (Path.Any())
             {
-                new MovementAction((Actor) Entity, Direction.GetDirection(Entity.Position, Path.First())).Perform();
+                new MovementAction(Entity, Direction.GetDirection(Entity.Position, Path.First())).Perform();
                 return;
             }
 
-            new WaitAction((Actor) Entity).Perform();
+            new WaitAction(Entity).Perform();
         }
     }
 }
