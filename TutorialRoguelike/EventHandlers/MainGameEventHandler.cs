@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SadConsole;
+﻿using SadConsole;
 using SadConsole.Input;
-using SadRogue.Primitives;
 using TutorialRoguelike.Actions;
-using TutorialRoguelike.Constants;
 
 namespace TutorialRoguelike.EventHandlers
 {
@@ -15,35 +10,9 @@ namespace TutorialRoguelike.EventHandlers
         {
         }
 
-        private Dictionary<Keys, Direction> Movements = new Dictionary<Keys, Direction>{
-            //Arrows
-            { Keys.Left, Direction.Left },
-            { Keys.Right, Direction.Right },
-            { Keys.Up, Direction.Up },
-            { Keys.Down, Direction.Down },
-            { Keys.Home, Direction.UpLeft },
-            { Keys.PageUp, Direction.UpRight },
-            { Keys.End, Direction.DownLeft },
-            { Keys.PageDown, Direction.DownRight },
-            //NumPad
-            { Keys.NumPad1, Direction.DownLeft },
-            { Keys.NumPad2, Direction.Down },
-            { Keys.NumPad3, Direction.DownRight },
-            { Keys.NumPad6, Direction.Right },
-            { Keys.NumPad9, Direction.UpRight },
-            { Keys.NumPad8, Direction.Up },
-            { Keys.NumPad7, Direction.UpLeft },
-            { Keys.NumPad4, Direction.Left },
-        };
-
-        private List<Keys> WaitKeys = new List<Keys>
-        {
-            Keys.NumPad5, Keys.OemPeriod, Keys.Delete
-        };
-
         public override bool ProcessKeyboard(IScreenObject host, Keyboard keyboard)
         {
-            foreach (var movement in Movements)
+            foreach (var movement in MovementKeys)
             {
                 if (keyboard.IsKeyPressed(movement.Key))
                 {
@@ -77,6 +46,12 @@ namespace TutorialRoguelike.EventHandlers
                 return true;
             }
 
+            if (keyboard.IsKeyPressed(Keys.Divide))
+            {
+                Engine.EventHandler = new LookHandler(Engine);
+                return true;
+            }
+
             if (keyboard.IsKeyPressed(Keys.G))
             {
                 return HandleAction(new PickupAction(Engine.Player));
@@ -84,17 +59,6 @@ namespace TutorialRoguelike.EventHandlers
 
             if (keyboard.IsKeyPressed(Keys.Escape))
                 return HandleAction(new EscapeAction(Engine.Player));
-
-            return false;
-        }
-
-        public override bool ProcessMouse(IScreenObject host, MouseScreenObjectState state)
-        {
-            if (Engine.Map.InBounds(state.CellPosition))
-            {
-                Engine.MouseLocation = state.CellPosition;
-                return true;
-            }
 
             return false;
         }

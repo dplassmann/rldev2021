@@ -36,7 +36,7 @@ namespace TutorialRoguelike.EventHandlers
             if (state.Mouse.LeftClicked || state.Mouse.RightClicked || state.Mouse.MiddleClicked)
                 return Exit();
 
-            return false;
+            return base.ProcessMouse(host, state);
         }
 
         // Return to the main event handler when a valid action was performed
