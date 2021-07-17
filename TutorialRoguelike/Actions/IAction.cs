@@ -9,8 +9,6 @@ namespace TutorialRoguelike.Actions
     {
         public Actor Entity { get; }
 
-        public Engine Engine => Entity.Map.Engine;
-
         public void Perform();
     }
 }

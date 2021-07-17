@@ -49,7 +49,7 @@ namespace TutorialRoguelike
             }
         }
 
-        private IEnumerable<string> Wrap(string s, int width)
+        private static IEnumerable<string> Wrap(string s, int width)
         {
             var result = new List<string>();
             while (s != null && s.Length > 0)

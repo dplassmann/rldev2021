@@ -9,12 +9,15 @@ using TutorialRoguelike.Entities;
 
 namespace TutorialRoguelike.Components.AI
 {
-    public class BaseAI : BaseComponent, IAction
+    public class BaseAI : IAction
     {
-        Actor IAction.Entity => (Actor) Entity;
+        public Actor Entity { get; private set; }
 
-        public BaseAI(Actor entity) : base(entity)
+        public Engine Engine => Entity.Map.Engine;
+
+        public BaseAI(Actor entity)
         {
+            Entity = entity;
         }
 
         public virtual void Perform()

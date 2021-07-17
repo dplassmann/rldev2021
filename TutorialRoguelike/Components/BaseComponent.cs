@@ -10,6 +10,10 @@ namespace TutorialRoguelike.Components
         private Entity _entity;
         public Entity Entity { get => _entity; set => _entity = value; }
 
+        public GameMap Map => Entity.Map;
+
+        public Engine Engine => Map.Engine;
+
         protected BaseComponent()
         {
         }
@@ -18,7 +22,5 @@ namespace TutorialRoguelike.Components
         {
             _entity = entity;
         }
-
-        public Engine Engine => Entity.Map.Engine;
     }
 }
