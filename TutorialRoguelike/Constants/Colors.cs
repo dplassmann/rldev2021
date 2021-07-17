@@ -8,6 +8,7 @@ namespace TutorialRoguelike.Constants
         public static readonly Color Player = Color.White;
         public static readonly Color Orc = Color.Green;
         public static readonly Color HealthPotion = Color.DarkViolet;
+        public static readonly Color LightningScroll = Color.Yellow;
 
         //Terrain
         public static readonly Color Floor = new Color(50, 50, 50);
@@ -16,6 +17,9 @@ namespace TutorialRoguelike.Constants
         //Text
         public static readonly Color PlayerAttack = new Color(0xE0, 0xE0, 0xE0);
         public static readonly Color EnemyAttack = new Color(0xFF, 0xC0, 0xC0);
+        public static readonly Color NeedsTarget = new Color(0x3F, 0xFF, 0xFF);
+        public static readonly Color StatusEffectApplied = new Color(0x3F, 0xFF, 0x3F);
+
 
         public static readonly Color PlayerDie = new Color(0xFF, 0x30, 0x30);
         public static readonly Color EnemyDie = new Color(0xFF, 0xA0, 0x30);

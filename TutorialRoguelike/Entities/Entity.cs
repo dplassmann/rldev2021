@@ -41,5 +41,11 @@ namespace TutorialRoguelike.Entities
                 Parent.Entities.Add(this);
             }
         }
+
+        // Returns the distance betwene the current entity and the given point.
+        public double Distance(Point position)
+        {
+            return SadRogue.Primitives.Distance.Chebyshev.Calculate(Position - position);
+        }
     }
 }

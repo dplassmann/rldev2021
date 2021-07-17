@@ -13,8 +13,8 @@ namespace TutorialRoguelike.Entities
     {
         // Actors
         public static Actor Player => new Actor<BaseAI>(
-                appearance: new ColoredGlyph(Colors.Player, Color.Transparent, (char)25), 
-                name: "Player", 
+                appearance: new ColoredGlyph(Colors.Player, Color.Transparent, (char)25),
+                name: "Player",
                 fighter: new Fighter(hp: 30, defense: 2, power: 5),
                 inventory: new Inventory(26));
         public static Actor Orc => new Actor<HostileEnemy>(
@@ -29,7 +29,14 @@ namespace TutorialRoguelike.Entities
                 inventory: new Inventory(0));
 
         //Items
-        public static Item HealthPotion => new Item(new ColoredGlyph(Colors.HealthPotion, Color.Transparent, 569), "Health Potion", new HealingConsumable(amount: 4));
+        public static Item HealthPotion => new Item(
+            appearance: new ColoredGlyph(Colors.HealthPotion, Color.Transparent, 569), 
+            name: "Health Potion", 
+            consumable: new HealingConsumable(amount: 4));
+        public static Item LightningScroll => new Item(
+            appearance: new ColoredGlyph(Colors.LightningScroll, Color.Transparent, 753), 
+            name: "Lightning Scroll", 
+            consumable: new LightningDamageConsumable(damage: 20, maximumRange: 5));
 
         public static Actor Corpse(Actor actor)
         {
