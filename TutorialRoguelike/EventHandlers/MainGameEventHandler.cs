@@ -67,7 +67,13 @@ namespace TutorialRoguelike.EventHandlers
 
             if (keyboard.IsKeyPressed(Keys.I))
             {
-                Engine.EventHandler = new InventoryEventHandler(Engine);
+                Engine.EventHandler = new InventoryActivateHandler(Engine);
+                return true;
+            }
+
+            if (keyboard.IsKeyPressed(Keys.D))
+            {
+                Engine.EventHandler = new InventoryDropHandler(Engine);
                 return true;
             }
 

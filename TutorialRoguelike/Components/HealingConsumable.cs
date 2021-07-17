@@ -20,6 +20,7 @@ namespace TutorialRoguelike.Components
             if (amountRecovered > 0)
             {
                 Engine.MessageLog.Add($"You consume the {Parent.Name}, and recover {amountRecovered} HP!", Colors.HealthRecovered);
+                Consume();
             }
             else
             {

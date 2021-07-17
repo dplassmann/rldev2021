@@ -7,5 +7,7 @@ namespace TutorialRoguelike
     public interface EntityContainer
     {
         public IList<Entity> Entities { get; }
+
+        public GameMap Map { get; }
     }
 }

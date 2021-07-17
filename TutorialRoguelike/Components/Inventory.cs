@@ -20,6 +20,7 @@ namespace TutorialRoguelike.Components
         public void Drop(Item item)
         {
             Items.Remove(item);
+            item.Parent = null;
             item.Place(Parent.Position, Parent.Map);
 
             Engine.MessageLog.Add($"{Parent.Name} dropped the {item.Name}.");

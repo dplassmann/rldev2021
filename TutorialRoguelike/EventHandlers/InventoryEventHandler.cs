@@ -9,9 +9,9 @@ using SadRogue.Primitives;
 
 namespace TutorialRoguelike.EventHandlers
 {
-    public class InventoryEventHandler : AskUserEventHandler
+    public abstract class InventoryEventHandler : AskUserEventHandler
     {
-        private const string Title = "<missing title>";
+        protected abstract string Title { get; }
         private SadConsole.Console Console { get; set; }
 
         public InventoryEventHandler(Engine engine) : base(engine)
@@ -78,9 +78,6 @@ namespace TutorialRoguelike.EventHandlers
             return base.ProcessKeyboard(host, keyboard);
         }
 
-        private IAction ItemSelected(Item item)
-        {
-            throw new NotImplementedException();
-        }
+        protected abstract IAction ItemSelected(Item item);
     }
 }

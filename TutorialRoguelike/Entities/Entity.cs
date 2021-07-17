@@ -1,6 +1,7 @@
 ﻿using System;
 using SadConsole;
 using SadRogue.Primitives;
+using TutorialRoguelike.Components;
 using TutorialRoguelike.Constants;
 
 namespace TutorialRoguelike.Entities
@@ -13,7 +14,7 @@ namespace TutorialRoguelike.Entities
         public string Name { get; set; }
         public bool BlocksMovement { get; set; }
         public RenderOrder RenderOrder { get; set; }
-        public GameMap Map => ((GameMap) Parent).Map;
+        public GameMap Map => Parent.Map;
 
         public Entity(ColoredGlyph appearance, string name, bool blocksMovement, RenderOrder renderOrder, GameMap map = null)
         {
