@@ -37,6 +37,7 @@ namespace TutorialRoguelike.MapGeneration
                 if (!rooms.Any())
                 {
                     engine.Player.Place(newRoom.Center, dungeon);
+                    EntityFactory.FireballScroll.Place(newRoom.Center+1, dungeon);
                 }
                 else //For all other rooms, tunnel to the previous
                 {
@@ -86,8 +87,10 @@ namespace TutorialRoguelike.MapGeneration
                 if (!dungeon.Entities.Any(e => e.Position == position))
                 {
                     var itemChance = GlobalRandom.DefaultRNG.NextDouble();
-                    if (itemChance < 0.2)
+                    if (itemChance < 0.7)
                         EntityFactory.HealthPotion.Place(position, dungeon);
+                    else if (itemChance < 0.8)
+                        EntityFactory.FireballScroll.Place(position, dungeon);
                     else if (itemChance < 0.9)
                         EntityFactory.ConfusionScroll.Place(position, dungeon);
                     else

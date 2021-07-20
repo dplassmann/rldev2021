@@ -41,6 +41,10 @@ namespace TutorialRoguelike.Entities
             appearance: new ColoredGlyph(Colors.ConfusionScroll, Color.Transparent, 753),
             name: "Confusion Scroll",
             consumable: new ConfusionConsumable(numberOfTurns: 10));
+        public static Item FireballScroll => new Item(
+            appearance: new ColoredGlyph(Colors.FireballScroll, Color.Transparent, 753),
+            name: "Fireball Scroll",
+            consumable: new FireballDamageConsumable(damage: 12, radius: 3));
 
         public static Actor Corpse(Actor actor)
         {

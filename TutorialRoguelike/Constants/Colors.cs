@@ -10,6 +10,7 @@ namespace TutorialRoguelike.Constants
         public static readonly Color HealthPotion = Color.DarkViolet;
         public static readonly Color LightningScroll = Color.Yellow;
         public static readonly Color ConfusionScroll = Color.BlueViolet;
+        public static readonly Color FireballScroll = Color.OrangeRed;
 
         //Terrain
         public static readonly Color Floor = new Color(50, 50, 50);
@@ -38,6 +39,11 @@ namespace TutorialRoguelike.Constants
 
         public static readonly Color ExtendedMessageLogFrame = Color.OliveDrab;
         public static readonly Color ExtendedMessageLogTitleText = Color.White;
+
+        //Other
+        public static readonly Color TargetingOverlay = Color.Red;
+        public static readonly Color TargetingAreaOverlay = Color.OrangeRed;
+
 
     }
 }

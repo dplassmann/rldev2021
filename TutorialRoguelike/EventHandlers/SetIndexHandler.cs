@@ -3,6 +3,7 @@ using SadConsole;
 using SadConsole.Input;
 using SadRogue.Primitives;
 using TutorialRoguelike.Actions;
+using TutorialRoguelike.Constants;
 using TutorialRoguelike.Entities;
 
 namespace TutorialRoguelike.EventHandlers
@@ -21,7 +22,7 @@ namespace TutorialRoguelike.EventHandlers
         public override void Render()
         {
             base.Render();
-            Engine.Console.AddDecorator(Engine.MouseLocation.X, Engine.MouseLocation.Y, 1, new[] { new CellDecorator(Color.Red, 817, Mirror.None) });
+            Engine.Console.AddDecorator(Engine.MouseLocation.X, Engine.MouseLocation.Y, 1, new[] { new CellDecorator(Colors.TargetingOverlay, 817, Mirror.None) });
         }
 
         public override bool ProcessKeyboard(IScreenObject host, Keyboard keyboard)
