@@ -48,7 +48,7 @@ namespace TutorialRoguelike.EventHandlers
             { Keys.PageDown, 10 } ,
         };
 
-        public override bool ProcessKeyboard(IScreenObject host, Keyboard keyboard)
+        public override IActionOrEventHandler ProcessKeyboard(IScreenObject host, Keyboard keyboard)
         {
             foreach (var key in UpDownKeys)
             {
@@ -60,32 +60,28 @@ namespace TutorialRoguelike.EventHandlers
                         Cursor = 0;
                     else //Otherwise move while staying clamped to the bounds of the history log
                         Cursor = Math.Max(0, Math.Min(Cursor + key.Value, LogLength - 1));
-                    return true;
                 }
             }
             if (keyboard.IsKeyPressed(Keys.Home))
             {
                 Cursor = 0; //Move directly to top message
-                return true;
             }
             else if (keyboard.IsKeyPressed(Keys.End))
             {
                 Cursor = LogLength - 1; //Move directly to last message
-                return true;
             }
             else if (keyboard.KeysPressed.Any()) //Any other key exits
             {
                 MessageLog.Parent = null;
-                Engine.EventHandler = new MainGameEventHandler(Engine);
-                Render();
+                return new MainGameEventHandler(Engine);
             }     
-            return true;
+            return null;
         }
 
-        public override bool ProcessMouse(IScreenObject host, MouseScreenObjectState state)
+        public override IActionOrEventHandler ProcessMouse(IScreenObject host, MouseScreenObjectState state)
         {
             Render();
-            return false;
+            return null;
         }
     }
 }

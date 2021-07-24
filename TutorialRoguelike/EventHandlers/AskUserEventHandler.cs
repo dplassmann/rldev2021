@@ -13,7 +13,7 @@ namespace TutorialRoguelike.EventHandlers
         }
 
         // By default any non-modifier key exits this input handler.
-        public override bool ProcessKeyboard(IScreenObject host, Keyboard keyboard)
+        public override IActionOrEventHandler ProcessKeyboard(IScreenObject host, Keyboard keyboard)
         {
             if (keyboard.HasKeysPressed)
             {
@@ -21,17 +21,17 @@ namespace TutorialRoguelike.EventHandlers
                 {
                     if (keyboard.IsKeyPressed(key))
                     {
-                        return false;
+                        return null;
                     }
                 }
                 return Exit();
             }
 
-            return false;
+            return null;
         }
 
         // By default any mouse click exits this input handler.
-        public override bool ProcessMouse(IScreenObject host, MouseScreenObjectState state)
+        public override IActionOrEventHandler ProcessMouse(IScreenObject host, MouseScreenObjectState state)
         {
             if (state.Mouse.LeftClicked || state.Mouse.RightClicked || state.Mouse.MiddleClicked)
                 return Exit();
@@ -39,24 +39,12 @@ namespace TutorialRoguelike.EventHandlers
             return base.ProcessMouse(host, state);
         }
 
-        // Return to the main event handler when a valid action was performed
-        public override bool HandleAction(IAction action)
-        {
-            if (base.HandleAction(action))
-            {
-                TransitionTo(new MainGameEventHandler(Engine));
-                return true;
-            }
-            return false;
-        }
-
         // Called when the user is trying to exit or cancel an action
         //
         // By default this returns to the main event handler
-        public bool Exit()
+        public EventHandler Exit()
         {
-            TransitionTo(new MainGameEventHandler(Engine));
-            return false;
+            return new MainGameEventHandler(Engine);
         }
     }
 }

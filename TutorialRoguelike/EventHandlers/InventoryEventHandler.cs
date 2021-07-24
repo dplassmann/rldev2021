@@ -54,20 +54,20 @@ namespace TutorialRoguelike.EventHandlers
 
         }
 
-        public override void TransitionTo(EventHandler newHandler)
+        public override void OnDestroy()
         {
             Console.Parent = null;
-            base.TransitionTo(newHandler);
+            base.OnDestroy();
         }
 
-        public override bool ProcessKeyboard(IScreenObject host, Keyboard keyboard)
+        public override IActionOrEventHandler ProcessKeyboard(IScreenObject host, Keyboard keyboard)
         {
             var key = keyboard.KeysPressed.FirstOrDefault();
             if (key != null && key.Key >= Keys.A && key.Key <= Keys.Z)
             {
                 try
                 {
-                    return HandleAction(ItemSelected(Engine.Player.Inventory.Items[key.Key - Keys.A]));
+                    return ItemSelected(Engine.Player.Inventory.Items[key.Key - Keys.A]);
                 }
                 catch (ArgumentOutOfRangeException)
                 {
@@ -78,6 +78,6 @@ namespace TutorialRoguelike.EventHandlers
             return base.ProcessKeyboard(host, keyboard);
         }
 
-        protected abstract IAction ItemSelected(Item item);
+        protected abstract IActionOrEventHandler ItemSelected(Item item);
     }
 }

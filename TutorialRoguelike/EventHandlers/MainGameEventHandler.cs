@@ -10,13 +10,13 @@ namespace TutorialRoguelike.EventHandlers
         {
         }
 
-        public override bool ProcessKeyboard(IScreenObject host, Keyboard keyboard)
+        public override IActionOrEventHandler ProcessKeyboard(IScreenObject host, Keyboard keyboard)
         {
             foreach (var movement in MovementKeys)
             {
                 if (keyboard.IsKeyPressed(movement.Key))
                 {
-                    return HandleAction(new BumpAction(Engine.Player, movement.Value));
+                    return new BumpAction(Engine.Player, movement.Value);
                 }
             }
 
@@ -24,43 +24,39 @@ namespace TutorialRoguelike.EventHandlers
             {
                 if (keyboard.IsKeyPressed(key))
                 {
-                    return HandleAction(new WaitAction(Engine.Player));
+                    return new WaitAction(Engine.Player);
                 }
             }
 
             if (keyboard.IsKeyPressed(Keys.V))
             {
-                Engine.EventHandler = new HistoryViewer(Engine);
-                return true;
+                return new HistoryViewer(Engine);
             }
 
             if (keyboard.IsKeyPressed(Keys.I))
             {
-                Engine.EventHandler = new InventoryActivateHandler(Engine);
-                return true;
+                return new InventoryActivateHandler(Engine);
             }
 
             if (keyboard.IsKeyPressed(Keys.D))
             {
-                Engine.EventHandler = new InventoryDropHandler(Engine);
-                return true;
+                return new InventoryDropHandler(Engine);
             }
 
             if (keyboard.IsKeyPressed(Keys.Divide))
             {
-                Engine.EventHandler = new LookHandler(Engine);
-                return true;
+                return new LookHandler(Engine);
             }
 
             if (keyboard.IsKeyPressed(Keys.G))
             {
-                return HandleAction(new PickupAction(Engine.Player));
+                return new PickupAction(Engine.Player);
             }
 
             if (keyboard.IsKeyPressed(Keys.Escape))
-                return HandleAction(new EscapeAction(Engine.Player));
+                return new EscapeAction(Engine.Player);
 
-            return false;
+            return null;
         }
     }
 }

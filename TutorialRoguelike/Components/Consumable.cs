@@ -6,7 +6,7 @@ namespace TutorialRoguelike.Components
     public abstract class Consumable : BaseComponent
     {
         // Try to return the action for this item
-        public virtual IAction GetAction(Actor consumer)
+        public virtual IActionOrEventHandler GetAction(Actor consumer)
         {
             return new ItemAction(consumer, (Item) Parent);
         }

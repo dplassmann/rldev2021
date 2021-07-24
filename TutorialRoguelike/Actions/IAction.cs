@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TutorialRoguelike.Entities;
+﻿using TutorialRoguelike.Entities;
 
 namespace TutorialRoguelike.Actions
 {
-    public interface IAction
+    public interface IAction : IActionOrEventHandler
     {
         public Actor Entity { get; }
 

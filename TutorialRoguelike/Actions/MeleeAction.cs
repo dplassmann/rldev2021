@@ -1,5 +1,5 @@
 ﻿using SadRogue.Primitives;
-using TutorialRoguelike;
+using TutorialRoguelike.Exceptions;
 using TutorialRoguelike.Constants;
 using TutorialRoguelike.Entities;
 

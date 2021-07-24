@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using TutorialRoguelike.Actions;
 using TutorialRoguelike.Entities;
+using TutorialRoguelike.Exceptions;
 
 namespace TutorialRoguelike.Components
 {

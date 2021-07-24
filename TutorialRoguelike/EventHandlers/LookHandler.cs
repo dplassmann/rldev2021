@@ -9,10 +9,9 @@ namespace TutorialRoguelike.EventHandlers
         {
         }
 
-        public override IAction IndexSelected(Point position)
+        public override IActionOrEventHandler IndexSelected(Point position)
         {
-            Engine.EventHandler = new MainGameEventHandler(Engine);
-            return null;
+            return new MainGameEventHandler(Engine);
         }
     }
 }

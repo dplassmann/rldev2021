@@ -1,5 +1,6 @@
 ﻿using SadConsole;
 using TutorialRoguelike.Entities;
+using TutorialRoguelike.Exceptions;
 
 namespace TutorialRoguelike.Actions
 {
@@ -11,7 +12,7 @@ namespace TutorialRoguelike.Actions
 
         public override void Perform()
         {
-            Game.Instance.MonoGameInstance.Exit();
+            throw new SystemExit();
         }
     }
 }

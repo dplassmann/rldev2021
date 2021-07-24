@@ -4,10 +4,11 @@ using SadConsole.Input;
 using SadRogue.Primitives;
 using TutorialRoguelike.Actions;
 using TutorialRoguelike.Constants;
+using TutorialRoguelike.Exceptions;
 
 namespace TutorialRoguelike.EventHandlers
 {
-    public abstract class EventHandler
+    public abstract class EventHandler : IActionOrEventHandler
     {
         private MouseScreenObjectState LastMouseState { get; set; }
 
@@ -46,16 +47,34 @@ namespace TutorialRoguelike.EventHandlers
 
         public Engine Engine { get; private set; }
 
-        public abstract bool ProcessKeyboard(IScreenObject host, Keyboard keyboard);
+        public IActionOrEventHandler ProcessEvents(IScreenObject host, Keyboard keyboard, MouseScreenObjectState mouseState)
+        {
+            var actionOrState = keyboard != null ? ProcessKeyboard(host, keyboard) : ProcessMouse(host, mouseState);
+            if (actionOrState is EventHandler)
+                return actionOrState;
+            if (HandleAction(actionOrState as IAction))
+            {
+                // A valid action was performed
+                if (!Engine.Player.IsAlive)
+                {
+                    // The player was killed sometime during or after the action
+                    return new GameOverEventHandler(Engine);
+                }
+                return new MainGameEventHandler(Engine);
+            }
+            return this;
+        }
 
-        public virtual bool ProcessMouse(IScreenObject host, MouseScreenObjectState state)
+        public abstract IActionOrEventHandler ProcessKeyboard(IScreenObject host, Keyboard keyboard);
+
+        public virtual IActionOrEventHandler ProcessMouse(IScreenObject host, MouseScreenObjectState state)
         {
             // Ignore first mouse event - prevent mouse move from triggering on every handler start
             // Could avoid this by constructing event handlers with mouse state from previous?
             if (LastMouseState == null)
             {
                 LastMouseState = state;
-                return false;
+                return this;
             }
 
             if (state.IsOnScreenObject)
@@ -66,12 +85,12 @@ namespace TutorialRoguelike.EventHandlers
                     {
                         Engine.MouseLocation = state.CellPosition;
                         LastMouseState = state;
-                        return true;
+                        return this;
                     }
                 }
                 LastMouseState = state;
             }
-            return false;
+            return this;
         }
 
         public virtual bool HandleAction(IAction action)
@@ -100,9 +119,6 @@ namespace TutorialRoguelike.EventHandlers
             Engine.Render();
         }
 
-        public virtual void TransitionTo(EventHandler newHandler)
-        {
-            Engine.EventHandler = newHandler;
-        }
+        public virtual void OnDestroy() { }
     }
 }

@@ -5,6 +5,7 @@ using SadConsole;
 using SadConsole.Input;
 using SadRogue.Primitives;
 using TutorialRoguelike.Actions;
+using TutorialRoguelike.Exceptions;
 
 namespace TutorialRoguelike.EventHandlers
 {
@@ -14,24 +15,17 @@ namespace TutorialRoguelike.EventHandlers
         {
         }
 
-        public override bool ProcessKeyboard(IScreenObject host, Keyboard keyboard)
+        public override IActionOrEventHandler ProcessKeyboard(IScreenObject host, Keyboard keyboard)
         {
             if (keyboard.IsKeyPressed(Keys.Escape))
-                return HandleAction(new EscapeAction(Engine.Player));
+                throw new SystemExit();
 
-            return false;
+            return null;
         }
 
-        public override bool ProcessMouse(IScreenObject host, MouseScreenObjectState state)
+        public override IActionOrEventHandler ProcessMouse(IScreenObject host, MouseScreenObjectState state)
         {
-            return false;
-        }
-
-        public override bool HandleAction(IAction action)
-        {
-            action.Perform();
-
-            return true;
+            return null;
         }
     }
 }

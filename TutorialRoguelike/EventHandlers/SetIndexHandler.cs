@@ -25,7 +25,7 @@ namespace TutorialRoguelike.EventHandlers
             Engine.Console.AddDecorator(Engine.MouseLocation.X, Engine.MouseLocation.Y, 1, new[] { new CellDecorator(Colors.TargetingOverlay, 817, Mirror.None) });
         }
 
-        public override bool ProcessKeyboard(IScreenObject host, Keyboard keyboard)
+        public override IActionOrEventHandler ProcessKeyboard(IScreenObject host, Keyboard keyboard)
         {
             if (keyboard.HasKeysPressed)
             {
@@ -49,7 +49,7 @@ namespace TutorialRoguelike.EventHandlers
                             Math.Max(0, Math.Min(targetPosition.X, Engine.Map.Width - 1)), 
                             Math.Max(0, Math.Min(targetPosition.Y, Engine.Map.Height - 1)));
                         Engine.MouseLocation = targetPosition;
-                        return true;
+                        return null;
                     }
                 }
 
@@ -57,7 +57,7 @@ namespace TutorialRoguelike.EventHandlers
                 {
                     if (keyboard.IsKeyPressed(key))
                     {
-                        return HandleAction(IndexSelected(Engine.MouseLocation));
+                        return IndexSelected(Engine.MouseLocation);
                     }
                 }
             }
@@ -65,17 +65,17 @@ namespace TutorialRoguelike.EventHandlers
             return base.ProcessKeyboard(host, keyboard);
         }
 
-        public override bool ProcessMouse(IScreenObject host, MouseScreenObjectState state)
+        public override IActionOrEventHandler ProcessMouse(IScreenObject host, MouseScreenObjectState state)
         {
             // Left click confirms selection
             if (state.Mouse.LeftClicked && Engine.Map.InBounds(state.CellPosition))
             {
-                return HandleAction(IndexSelected(Engine.MouseLocation));
+                return IndexSelected(Engine.MouseLocation);
             }
 
             return base.ProcessMouse(host, state);
         }
 
-        public abstract IAction IndexSelected(Point position);
+        public abstract IActionOrEventHandler IndexSelected(Point position);
     }
 }

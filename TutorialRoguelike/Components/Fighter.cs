@@ -61,7 +61,6 @@ namespace TutorialRoguelike.Components
             if (Parent == Engine.Player)
             {
                 deathMessage = "You died!";
-                Engine.EventHandler = new GameOverEventHandler(Engine);
             } else
             {
                 deathMessage = $"{Parent.Name} is dead!";

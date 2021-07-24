@@ -5,6 +5,7 @@ using SadRogue.Primitives;
 using SadRogue.Primitives.GridViews;
 using TutorialRoguelike.Entities;
 using TutorialRoguelike.EventHandlers;
+using TutorialRoguelike.Exceptions;
 
 namespace TutorialRoguelike
 {
@@ -14,7 +15,6 @@ namespace TutorialRoguelike
         public GameMap Map;
         public Console Console;
         public InfoPanel InfoConsole;
-        public EventHandler EventHandler;
         public Point MouseLocation;
         public MessageLog MessageLog => InfoConsole.MessageLog;
 
@@ -26,7 +26,6 @@ namespace TutorialRoguelike
             Player = player;
             Console = console;
             InfoConsole = infoConsole;
-            EventHandler = new MainGameEventHandler(this);
             MouseLocation = (0, 0);
         }
 

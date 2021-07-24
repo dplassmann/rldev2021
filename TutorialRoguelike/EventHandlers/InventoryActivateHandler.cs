@@ -11,7 +11,7 @@ namespace TutorialRoguelike.EventHandlers
 
         protected override string Title => "Select an item to use";
 
-        protected override IAction ItemSelected(Item item)
+        protected override IActionOrEventHandler ItemSelected(Item item)
         {
             return item.Consumable.GetAction(Engine.Player);
         }

@@ -12,7 +12,7 @@ namespace TutorialRoguelike.EventHandlers
             Callback = callback;
         }
 
-        public override IAction IndexSelected(Point position)
+        public override IActionOrEventHandler IndexSelected(Point position)
         {
             return Callback.Invoke(position);
         }

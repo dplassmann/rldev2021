@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using TutorialRoguelike.Entities;
+using TutorialRoguelike.Exceptions;
 
 namespace TutorialRoguelike.Actions
 {

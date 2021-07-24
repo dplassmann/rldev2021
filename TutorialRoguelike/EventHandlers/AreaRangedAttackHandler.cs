@@ -28,7 +28,7 @@ namespace TutorialRoguelike.EventHandlers
         }
 
 
-        public override IAction IndexSelected(Point position)
+        public override IActionOrEventHandler IndexSelected(Point position)
         {
             return Callback(position);
         }

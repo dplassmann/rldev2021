@@ -1,5 +1,6 @@
 ﻿using TutorialRoguelike.Actions;
 using TutorialRoguelike.Constants;
+using TutorialRoguelike.Exceptions;
 
 namespace TutorialRoguelike.Components
 {

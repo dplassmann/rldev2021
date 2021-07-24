@@ -40,6 +40,9 @@ namespace TutorialRoguelike.Constants
         public static readonly Color ExtendedMessageLogFrame = Color.OliveDrab;
         public static readonly Color ExtendedMessageLogTitleText = Color.White;
 
+        public static readonly Color MenuTitle = Color.Yellow;
+        public static readonly Color MenuText = Color.White;
+
         //Other
         public static readonly Color TargetingOverlay = Color.Red;
         public static readonly Color TargetingAreaOverlay = Color.OrangeRed;

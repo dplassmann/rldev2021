@@ -3,6 +3,7 @@ using TutorialRoguelike.AI;
 using TutorialRoguelike.Constants;
 using TutorialRoguelike.Entities;
 using TutorialRoguelike.EventHandlers;
+using TutorialRoguelike.Exceptions;
 
 namespace TutorialRoguelike.Components
 {
@@ -14,11 +15,10 @@ namespace TutorialRoguelike.Components
             NumberOfTurns = numberOfTurns;
         }
 
-        public override IAction GetAction(Actor consumer)
+        public override IActionOrEventHandler GetAction(Actor consumer)
         {
             Engine.MessageLog.Add("Select a target location", Colors.NeedsTarget);
-            Engine.EventHandler.TransitionTo(new SingleTargetRangedAttackHandler(Engine, p => new ItemAction(consumer, (Item)Parent, p)));
-            return null;
+            return new SingleTargetRangedAttackHandler(Engine, p => new ItemAction(consumer, (Item)Parent, p));
         }
 
         public override void Activate(ItemAction action)

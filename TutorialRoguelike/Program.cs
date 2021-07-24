@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using SadConsole;
-using SadRogue.Primitives;
+﻿using SadConsole;
 using TutorialRoguelike.Constants;
 using TutorialRoguelike.Entities;
 using TutorialRoguelike.EventHandlers;
@@ -50,8 +48,7 @@ namespace TutorialRoguelike
             Engine.Map = MapGenerator.GenerateDungeon(DungeonWidth, DungeonHeight, MaxRooms, RoomMinSize, RoomMaxSize, MaxMonstersPerRoom, MaxItemsPerRoom, Engine);
 
             startingConsole.IsFocused = true;
-            startingConsole.SadComponents.Add(new KeyboardHandler(Engine));
-            startingConsole.SadComponents.Add(new MouseHandler(Engine));
+            startingConsole.SadComponents.Add(new InputHandler(new MainGameEventHandler(Engine)));
 
             Engine.MessageLog.Add("Hello and welcome, adventurer, to yet another dungeon", Colors.WelcomeText);
 

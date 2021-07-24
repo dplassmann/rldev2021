@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using TutorialRoguelike.Actions;
-using TutorialRoguelike.AI;
 using TutorialRoguelike.Constants;
 using TutorialRoguelike.Entities;
 using TutorialRoguelike.EventHandlers;
+using TutorialRoguelike.Exceptions;
 
 namespace TutorialRoguelike.Components
 {
@@ -17,11 +17,10 @@ namespace TutorialRoguelike.Components
             Radius = radius;
         }
 
-        public override IAction GetAction(Actor consumer)
+        public override IActionOrEventHandler GetAction(Actor consumer)
         {
             Engine.MessageLog.Add("Select a target location", Colors.NeedsTarget);
-            Engine.EventHandler.TransitionTo(new AreaRangedAttackHandler(Engine, Radius, p => new ItemAction(consumer, (Item)Parent, p)));
-            return null;
+            return new AreaRangedAttackHandler(Engine, Radius, p => new ItemAction(consumer, (Item)Parent, p));
         }
 
         public override void Activate(ItemAction action)
