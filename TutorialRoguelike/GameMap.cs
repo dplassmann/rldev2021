@@ -5,6 +5,8 @@ using SadRogue.Primitives.GridViews;
 using TutorialRoguelike.Entities;
 using System.Linq;
 using TutorialRoguelike.Terrain;
+using Newtonsoft.Json;
+using TutorialRoguelike.Serialization;
 
 namespace TutorialRoguelike
 {
@@ -12,7 +14,6 @@ namespace TutorialRoguelike
     {
         public int Width { get; private set; }
         public int Height { get; private set; }
-
         public ArrayView<Tile> Tiles { get; private set; }
         public ArrayView<bool> Visible { get; private set; }
         public ArrayView<bool> Explored { get; private set; }
@@ -36,6 +37,7 @@ namespace TutorialRoguelike
         public IEnumerable<Item> Items => Entities.Where(e => e is Item).Cast<Item>();
         public GameMap Map => this;
 
+        [JsonConstructor]
         public GameMap(Point size, Engine engine)
         {
             Width = size.X;
@@ -49,6 +51,26 @@ namespace TutorialRoguelike
             CloneFill(Tiles.Positions(), TileFactory.Wall);
             Visible.Fill(false);
             Explored.Fill(false);
+        }
+
+        public GameMap(GameMapSerializable serializableMap, Engine engine)
+        {
+            Width = serializableMap.Width;
+            Height = serializableMap.Height;
+            Tiles = new ArrayView<Tile>(serializableMap.Tiles.Select(t => TileFactory.Get(t)).ToArray(), Width);
+            Visible = new ArrayView<bool>(serializableMap.Visible, Width);
+            Explored = new ArrayView<bool>(serializableMap.Explored, Width);
+            Entities = new List<Entity>();
+            foreach (var e in serializableMap.Entities.Where(e=> e.Name != "Player"))
+            {
+                e.Place(e.Position, this);
+                var actor = e as Actor;
+                if (actor != null && actor.IsAlive)
+                {
+                    actor.AI.Entity = actor;
+                }
+            }
+            Engine = engine;
         }
 
         public Entity GetBlockingEntityAt(Point position)

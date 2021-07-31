@@ -1,5 +1,7 @@
 ﻿using SadConsole;
 using SadRogue.Primitives;
+using Newtonsoft.Json;
+using SadConsole.SerializedTypes;
 
 namespace TutorialRoguelike.Terrain
 {
@@ -7,14 +9,21 @@ namespace TutorialRoguelike.Terrain
     {
         public bool IsWalkable { get; private set; }
         public bool IsTransparent { get; private set; }
+
+        [JsonConverter(typeof(ColoredGlyphJsonConverter))]
         public ColoredGlyph Glyph { get; private set; }
+
+        [JsonConverter(typeof(ColoredGlyphJsonConverter))]
         public ColoredGlyph DarkGlyph { get; private set; }
 
-        public Tile(bool walkable, bool transparent, ColoredGlyph glyph)
+        public TileType TileType { get; private set; }
+
+        public Tile(bool walkable, bool transparent, ColoredGlyph glyph, TileType tileType)
         {
             IsWalkable = walkable;
             IsTransparent = transparent;
             Glyph = glyph;
+            TileType = tileType;
 
             DarkGlyph = glyph.Clone();
             DarkGlyph.Foreground = DarkGlyph.Foreground.GetDarker();
@@ -23,7 +32,7 @@ namespace TutorialRoguelike.Terrain
 
         public Tile Clone()
         {
-            return new Tile(IsWalkable, IsTransparent, Glyph.Clone());
+            return new Tile(IsWalkable, IsTransparent, Glyph.Clone(), TileType);
         }
     }
 }

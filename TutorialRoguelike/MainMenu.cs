@@ -1,9 +1,13 @@
-﻿using SadConsole;
+﻿using System;
+using System.IO;
+using SadConsole;
 using SadConsole.Input;
 using SadRogue.Primitives;
 using TutorialRoguelike.Constants;
 using TutorialRoguelike.EventHandlers;
 using TutorialRoguelike.Exceptions;
+using Console = SadConsole.Console;
+using EventHandler = TutorialRoguelike.EventHandlers.EventHandler;
 
 namespace TutorialRoguelike
 {
@@ -33,16 +37,16 @@ namespace TutorialRoguelike
             for (int i = 0; i < options.Length; i++)
             {
                 MenuConsole.Print(
-                    0, 
-                    MenuConsole.Height / 2 - 2 + i, 
-                    options[i].Align(HorizontalAlignment.Left, menuWidth).Align(HorizontalAlignment.Center, MenuConsole.Width), 
+                    0,
+                    MenuConsole.Height / 2 - 2 + i,
+                    options[i].Align(HorizontalAlignment.Left, menuWidth).Align(HorizontalAlignment.Center, MenuConsole.Width),
                     Colors.MenuText);
             }
         }
 
         public override void Render()
         {
-                
+
         }
 
         public override void OnDestroy()
@@ -57,7 +61,18 @@ namespace TutorialRoguelike
                 throw new SystemExit();
             else if (keyboard.IsKeyPressed(Keys.C))
             {
-                //TODO Load game
+                try
+                {
+                    return new MainGameEventHandler(Initialization.LoadGame());
+                }
+                catch (FileNotFoundException)
+                {
+                    return new PopupMessage("No saved game to load", this, MenuConsole);
+                }
+                catch (Exception ex)
+                {
+                    return new PopupMessage($"Failed to load save:\n{ex.Message}", this, MenuConsole);
+                }
             }
             else if (keyboard.IsKeyPressed(Keys.N))
             {

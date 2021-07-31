@@ -6,14 +6,19 @@ using SadRogue.Primitives.GridViews;
 using GoRogue.Pathing;
 using TutorialRoguelike.Actions;
 using TutorialRoguelike.Entities;
+using Newtonsoft.Json;
 
 namespace TutorialRoguelike.AI
 {
     public class BaseAI : IAction
     {
-        public Actor Entity { get; private set; }
+        public Actor Entity { get; set; }
 
+        [JsonIgnore]
         public Engine Engine => Entity.Map.Engine;
+
+        [JsonConstructor]
+        public BaseAI() { }
 
         public BaseAI(Actor entity)
         {

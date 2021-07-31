@@ -1,8 +1,7 @@
 ﻿using System;
-using SadConsole;
+using Newtonsoft.Json;
 using TutorialRoguelike.Constants;
 using TutorialRoguelike.Entities;
-using TutorialRoguelike.EventHandlers;
 
 namespace TutorialRoguelike.Components
 {
@@ -30,13 +29,16 @@ namespace TutorialRoguelike.Components
 
         public Actor Actor { get => (Actor) Parent; }
 
-        public Fighter(int hp, int defense, int power) : base()
+        [JsonConstructor]
+        public Fighter(int hp, int maxHp, int defense, int power)
         {
-            MaxHp = hp;
+            MaxHp = maxHp;
             _hp = hp;
             Defense = defense;
             Power = power;
         }
+
+        public Fighter(int hp, int defense, int power) : this(hp, hp, defense, power) { }
 
         public int Heal(int amount)
         {

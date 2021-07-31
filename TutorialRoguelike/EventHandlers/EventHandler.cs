@@ -40,10 +40,15 @@ namespace TutorialRoguelike.EventHandlers
         {
             Keys.NumPad5, Keys.OemPeriod, Keys.Delete
         };
-        protected EventHandler(Engine engine)
+        protected EventHandler(Engine engine, bool isTemporary = false)
         {
             Engine = engine;
+            IsTemporary = isTemporary;
         }
+
+        // By default, assume that when switching to an event handler, we should destroy the old one.
+        // This doesn't hold true for popup messages, etc.
+        public bool IsTemporary { get; private set; }
 
         public Engine Engine { get; private set; }
 

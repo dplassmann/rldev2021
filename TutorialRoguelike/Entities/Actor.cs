@@ -1,4 +1,5 @@
-﻿using SadConsole;
+﻿using Newtonsoft.Json;
+using SadConsole;
 using TutorialRoguelike.AI;
 using TutorialRoguelike.Components;
 using TutorialRoguelike.Constants;
@@ -11,6 +12,7 @@ namespace TutorialRoguelike.Entities
         public Inventory Inventory { get; private set; }
         public BaseAI AI { get; set; }
 
+        [JsonConstructor]
         public Actor(ColoredGlyph appearance, string name, Fighter fighter, Inventory inventory, GameMap map = null) : base(appearance, name, true, RenderOrder.Actor, map)
         {
             Fighter = fighter;
@@ -18,6 +20,18 @@ namespace TutorialRoguelike.Entities
 
             Inventory = inventory;
             Inventory.Parent = this;
+        }
+
+        public Actor(Actor serializableActor, GameMap map = null) : base(serializableActor, map)
+        {
+            Fighter = serializableActor.Fighter;
+            Fighter.Parent = this;
+
+            Inventory = new Inventory(serializableActor.Inventory);
+            Inventory.Parent = this;
+
+            AI = serializableActor.AI;
+            AI.Entity = this;
         }
 
         public bool IsAlive => AI != null;

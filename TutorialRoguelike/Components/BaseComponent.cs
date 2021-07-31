@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Newtonsoft.Json;
 using TutorialRoguelike.Entities;
 
 namespace TutorialRoguelike.Components
@@ -8,12 +6,16 @@ namespace TutorialRoguelike.Components
     public abstract class BaseComponent
     {
         private Entity _parent;
+        [JsonIgnore]
         public Entity Parent { get => _parent; set => _parent = value; }
 
+        [JsonIgnore]
         public GameMap Map => Parent.Map;
 
+        [JsonIgnore]
         public Engine Engine => Map.Engine;
 
+        [JsonConstructor]
         protected BaseComponent()
         {
         }

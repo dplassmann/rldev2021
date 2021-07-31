@@ -9,8 +9,8 @@ namespace TutorialRoguelike.Components
 {
     public class FireballDamageConsumable : Consumable
     {
-        private int Damage { get; set; }
-        private int Radius { get; set; }
+        public int Damage { get; set; }
+        public int Radius { get; set; }
         public FireballDamageConsumable(int damage, int radius)
         {
             Damage = damage;

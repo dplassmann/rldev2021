@@ -1,8 +1,11 @@
-﻿using SadConsole;
+﻿using System.IO;
+using Newtonsoft.Json;
+using SadConsole;
 using TutorialRoguelike.Constants;
 using TutorialRoguelike.Entities;
 using TutorialRoguelike.EventHandlers;
 using TutorialRoguelike.MapGeneration;
+using TutorialRoguelike.Serialization;
 
 namespace TutorialRoguelike
 {
@@ -35,6 +38,49 @@ namespace TutorialRoguelike
 
             startingConsole.IsFocused = true;
             startingConsole.SadComponents.Add(new InputHandler(new MainGameEventHandler(engine)));
+
+            engine.MessageLog.Add("Hello and welcome, adventurer, to yet another dungeon", Colors.WelcomeText);
+
+            engine.UpdateFov();
+            engine.Render();
+
+            return engine;
+        }
+
+        private static JsonSerializerSettings SerializationSettings = new JsonSerializerSettings
+        {
+            PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+            TypeNameHandling = TypeNameHandling.All,
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+        };
+
+        public static void SaveAs(Engine engine, string filename = "savegame.sav")
+        {
+            var serialized = JsonConvert.SerializeObject((EngineSerializable)engine, SerializationSettings);
+            File.WriteAllText(filename, serialized);
+        }
+
+        public static Engine LoadGame(string filename = "savegame.sav")
+        {
+            var console = (Console)GameHost.Instance.Screen;
+
+            var serialized = File.ReadAllText(filename);
+
+            var savedEngine = JsonConvert.DeserializeObject<EngineSerializable>(serialized, SerializationSettings);
+
+            var player = new Actor(savedEngine.Player);
+
+            var infoConsole = new InfoPanel(Program.WindowWidth, 5, player);
+            infoConsole.Position = (0, Program.WindowHeight - 5);
+            console.Children.Add(infoConsole);
+
+            var engine = new Engine(player, console, infoConsole);
+            var map = new GameMap(savedEngine.Map, engine);
+            player.Place(player.Position, map);
+            engine.Map = map;
+
+            console.IsFocused = true;
+            console.SadComponents.Add(new InputHandler(new MainGameEventHandler(engine)));
 
             engine.MessageLog.Add("Hello and welcome, adventurer, to yet another dungeon", Colors.WelcomeText);
 

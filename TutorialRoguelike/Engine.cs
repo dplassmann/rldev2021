@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using GoRogue.FOV;
+using Newtonsoft.Json;
 using SadConsole;
 using SadRogue.Primitives;
 using SadRogue.Primitives.GridViews;
 using TutorialRoguelike.Entities;
-using TutorialRoguelike.EventHandlers;
 using TutorialRoguelike.Exceptions;
 
 namespace TutorialRoguelike
@@ -13,8 +13,11 @@ namespace TutorialRoguelike
     {
         public Actor Player;
         public GameMap Map;
+        [JsonIgnore]
         public Console Console;
+        [JsonIgnore]
         public InfoPanel InfoConsole;
+        [JsonIgnore]
         public Point MouseLocation;
         public MessageLog MessageLog => InfoConsole.MessageLog;
 

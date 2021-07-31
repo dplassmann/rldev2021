@@ -42,26 +42,40 @@ namespace TutorialRoguelike
                 handler = Handler.ProcessEvents(host, keyboard, mouseState);
                 if (handler is EventHandler && handler != Handler)
                 {
-                    Handler.OnDestroy();
+                    if (!((EventHandler)handler).IsTemporary)
+                        Handler.OnDestroy();
                     Handler = (EventHandler) handler;
                 }
             }
             catch (QuitWithoutSaving)
             {
-                Game.Instance.MonoGameInstance.Exit();
+                Exit();
             }
             catch (SystemExit)
             {
-                //TODO Add save
-                Game.Instance.MonoGameInstance.Exit();
+                SaveGame();
+                Exit();
             }
             catch (Exception)
             {
-                //TODO Add save
-                Game.Instance.MonoGameInstance.Exit();
+                SaveGame();
+                Exit();
             }
 
             Handler.Render();
+        }
+
+        private void SaveGame()
+        {
+            if (Handler.Engine != null)
+            {
+                Initialization.SaveAs(Handler.Engine);
+            }
+        }
+
+        private void Exit()
+        {
+            Game.Instance.MonoGameInstance.Exit();
         }
     }
 }
