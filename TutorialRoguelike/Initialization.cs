@@ -89,5 +89,13 @@ namespace TutorialRoguelike
 
             return engine;
         }
+
+        public static void DeleteGame(string filename = "savegame.sav")
+        {
+            if (File.Exists(filename))
+            {
+                File.Delete(filename);
+            }
+        }
     }
 }

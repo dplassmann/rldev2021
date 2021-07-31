@@ -18,7 +18,7 @@ namespace TutorialRoguelike.EventHandlers
         public override IActionOrEventHandler ProcessKeyboard(IScreenObject host, Keyboard keyboard)
         {
             if (keyboard.IsKeyPressed(Keys.Escape))
-                throw new SystemExit();
+                Quit();
 
             return null;
         }
@@ -26,6 +26,12 @@ namespace TutorialRoguelike.EventHandlers
         public override IActionOrEventHandler ProcessMouse(IScreenObject host, MouseScreenObjectState state)
         {
             return null;
+        }
+
+        public void Quit()
+        {
+            Initialization.DeleteGame();
+            throw new QuitWithoutSaving();
         }
     }
 }

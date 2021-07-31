@@ -31,7 +31,8 @@ namespace TutorialRoguelike.Entities
             Inventory.Parent = this;
 
             AI = serializableActor.AI;
-            AI.Entity = this;
+            if (AI != null)
+                AI.Entity = this;
         }
 
         public bool IsAlive => AI != null;
