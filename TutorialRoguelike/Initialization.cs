@@ -4,8 +4,9 @@ using SadConsole;
 using TutorialRoguelike.Constants;
 using TutorialRoguelike.Entities;
 using TutorialRoguelike.EventHandlers;
-using TutorialRoguelike.MapGeneration;
 using TutorialRoguelike.Serialization;
+using TutorialRoguelike.UI;
+using TutorialRoguelike.World;
 
 namespace TutorialRoguelike
 {
@@ -34,7 +35,8 @@ namespace TutorialRoguelike
             startingConsole.Children.Add(infoConsole);
 
             var engine = new Engine(player, startingConsole, infoConsole);
-            engine.Map = MapGenerator.GenerateDungeon(dungeonWidth, dungeonHeight, maxRooms, roomMinSize, roomMaxSize, maxMonstersPerRoom, maxItemsPerRoom, engine);
+            engine.World = new GameWorld(engine, dungeonWidth, dungeonHeight, maxRooms, roomMinSize, roomMaxSize, maxMonstersPerRoom, maxItemsPerRoom);
+            engine.World.GenerateFloor();
 
             startingConsole.IsFocused = true;
             startingConsole.SadComponents.Add(new InputHandler(new MainGameEventHandler(engine)));
@@ -78,6 +80,8 @@ namespace TutorialRoguelike
             var map = new GameMap(savedEngine.Map, engine);
             player.Place(player.Position, map);
             engine.Map = map;
+            engine.World = savedEngine.World;
+            engine.World.Engine = engine;
 
             console.IsFocused = true;
             console.SadComponents.Add(new InputHandler(new MainGameEventHandler(engine)));

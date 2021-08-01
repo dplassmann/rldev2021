@@ -3,6 +3,7 @@ using SadConsole;
 using TutorialRoguelike.AI;
 using TutorialRoguelike.Components;
 using TutorialRoguelike.Constants;
+using TutorialRoguelike.World;
 
 namespace TutorialRoguelike.Entities
 {

@@ -1,6 +1,6 @@
 ﻿using SadRogue.Primitives;
 
-namespace TutorialRoguelike
+namespace TutorialRoguelike.UI
 {
     public class Message
     {

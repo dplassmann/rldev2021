@@ -5,6 +5,7 @@ using SadConsole.SerializedTypes;
 using SadRogue.Primitives;
 using TutorialRoguelike.Components;
 using TutorialRoguelike.Constants;
+using TutorialRoguelike.World;
 
 namespace TutorialRoguelike.Entities
 {

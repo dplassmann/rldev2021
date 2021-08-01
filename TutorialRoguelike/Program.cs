@@ -1,4 +1,5 @@
 ﻿using SadConsole;
+using TutorialRoguelike.UI;
 
 namespace TutorialRoguelike
 {

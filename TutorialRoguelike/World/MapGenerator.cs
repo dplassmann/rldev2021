@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Linq;
 using SadRogue.Primitives;
 using GoRogue;
@@ -8,7 +6,7 @@ using GoRogue.Random;
 using TutorialRoguelike.Entities;
 using TutorialRoguelike.Terrain;
 
-namespace TutorialRoguelike.MapGeneration
+namespace TutorialRoguelike.World
 {
     public class MapGenerator
     {
@@ -37,7 +35,6 @@ namespace TutorialRoguelike.MapGeneration
                 if (!rooms.Any())
                 {
                     engine.Player.Place(newRoom.Center, dungeon);
-                    EntityFactory.FireballScroll.Place(newRoom.Center+1, dungeon);
                 }
                 else //For all other rooms, tunnel to the previous
                 {
@@ -49,6 +46,10 @@ namespace TutorialRoguelike.MapGeneration
                 //Finally save the new room
                 rooms.Add(newRoom);
             }
+
+            dungeon.DownStairsLocation = rooms.Last().Center;
+            dungeon.Tiles[dungeon.DownStairsLocation] = TileFactory.DownStairs;
+
             return dungeon;
         }
 
@@ -104,7 +105,7 @@ namespace TutorialRoguelike.MapGeneration
             Point corner;
 
             //randomly decide movement direction
-            corner = (GlobalRandom.DefaultRNG.NextDouble() < 0.5) ? (end.X, start.Y) : (start.X, end.Y);
+            corner = GlobalRandom.DefaultRNG.NextDouble() < 0.5 ? (end.X, start.Y) : (start.X, end.Y);
 
             foreach (var p in Lines.Get(start, corner))
             {

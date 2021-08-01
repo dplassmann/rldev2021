@@ -12,6 +12,10 @@ namespace TutorialRoguelike.EventHandlers
 
         public override IActionOrEventHandler ProcessKeyboard(IScreenObject host, Keyboard keyboard)
         {
+            if (keyboard.IsKeyPressed(Keys.OemPeriod) && (keyboard.IsKeyDown(Keys.LeftShift) || keyboard.IsKeyDown(Keys.RightShift))){
+                return new TakeStairsAction(Engine.Player);
+            }
+
             foreach (var movement in MovementKeys)
             {
                 if (keyboard.IsKeyPressed(movement.Key))

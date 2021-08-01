@@ -8,7 +8,7 @@ using TutorialRoguelike.Terrain;
 using Newtonsoft.Json;
 using TutorialRoguelike.Serialization;
 
-namespace TutorialRoguelike
+namespace TutorialRoguelike.World
 {
     public class GameMap : EntityContainer
     {
@@ -20,18 +20,23 @@ namespace TutorialRoguelike
 
         private bool _isWalkableDirty = true;
         private ArrayView<bool> _walkable;
-        public ArrayView<bool> Walkable { 
-            get { 
+        public ArrayView<bool> Walkable
+        {
+            get
+            {
                 if (_isWalkableDirty)
                 {
                     _walkable = new ArrayView<bool>(Tiles.ToArray().Select(t => t.IsWalkable).ToArray(), Width);
                     _isWalkableDirty = false;
                 }
-                return _walkable; 
-            } 
+                return _walkable;
+            }
         }
 
         public IList<Entity> Entities { get; private set; }
+
+        public Point DownStairsLocation { get; set; }
+
         public Engine Engine { get; private set; }
         public IEnumerable<Actor> Actors => Entities.Where(e => e is Actor actor && actor.IsAlive).Cast<Actor>();
         public IEnumerable<Item> Items => Entities.Where(e => e is Item).Cast<Item>();
@@ -61,7 +66,8 @@ namespace TutorialRoguelike
             Visible = new ArrayView<bool>(serializableMap.Visible, Width);
             Explored = new ArrayView<bool>(serializableMap.Explored, Width);
             Entities = new List<Entity>();
-            foreach (var e in serializableMap.Entities.Where(e=> e.Name != "Player"))
+            DownStairsLocation = serializableMap.DownStairsLocation;
+            foreach (var e in serializableMap.Entities.Where(e => e.Name != "Player"))
             {
                 e.Place(e.Position, this);
                 var actor = e as Actor;
@@ -111,7 +117,8 @@ namespace TutorialRoguelike
         public Tile this[Point position]
         {
             get { return Tiles[position.X, position.Y]; }
-            set { 
+            set
+            {
                 Tiles[position.X, position.Y] = value;
                 _isWalkableDirty = true;
             }
@@ -119,7 +126,8 @@ namespace TutorialRoguelike
         public Tile this[int x, int y]
         {
             get { return Tiles[x, y]; }
-            set { 
+            set
+            {
                 Tiles[x, y] = value;
                 _isWalkableDirty = true;
             }

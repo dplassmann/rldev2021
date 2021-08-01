@@ -15,12 +15,14 @@ namespace TutorialRoguelike.Constants
         //Terrain
         public static readonly Color Floor = new Color(50, 50, 50);
         public static readonly Color Wall = Color.Gray;
+        public static readonly Color Stairs = new Color(200, 180, 50);
 
         //Text
         public static readonly Color PlayerAttack = new Color(0xE0, 0xE0, 0xE0);
         public static readonly Color EnemyAttack = new Color(0xFF, 0xC0, 0xC0);
         public static readonly Color NeedsTarget = new Color(0x3F, 0xFF, 0xFF);
         public static readonly Color StatusEffectApplied = new Color(0x3F, 0xFF, 0x3F);
+        public static readonly Color Descend = new Color(0x9F, 0x3F, 0xFF);
 
 
         public static readonly Color PlayerDie = new Color(0xFF, 0x30, 0x30);

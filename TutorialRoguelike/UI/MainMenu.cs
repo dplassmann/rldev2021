@@ -9,7 +9,7 @@ using TutorialRoguelike.Exceptions;
 using Console = SadConsole.Console;
 using EventHandler = TutorialRoguelike.EventHandlers.EventHandler;
 
-namespace TutorialRoguelike
+namespace TutorialRoguelike.UI
 {
     public class MainMenu : EventHandler
     {

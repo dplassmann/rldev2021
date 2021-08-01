@@ -6,13 +6,26 @@ using SadRogue.Primitives;
 using SadRogue.Primitives.GridViews;
 using TutorialRoguelike.Entities;
 using TutorialRoguelike.Exceptions;
+using TutorialRoguelike.UI;
+using TutorialRoguelike.World;
 
 namespace TutorialRoguelike
 {
     public class Engine
     {
         public Actor Player;
-        public GameMap Map;
+
+        private GameMap _map;
+        public GameMap Map { 
+            get => _map; 
+            set
+            {
+                _map = value;
+                FOV = null;
+            }
+        }
+        public GameWorld World;
+
         [JsonIgnore]
         public Console Console;
         [JsonIgnore]

@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using TutorialRoguelike.Entities;
+using TutorialRoguelike.World;
 
 namespace TutorialRoguelike.Components
 {

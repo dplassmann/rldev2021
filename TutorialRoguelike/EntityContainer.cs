@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using TutorialRoguelike.Entities;
+using TutorialRoguelike.World;
 
 namespace TutorialRoguelike
 {
