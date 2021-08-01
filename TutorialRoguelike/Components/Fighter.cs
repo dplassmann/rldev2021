@@ -7,7 +7,7 @@ namespace TutorialRoguelike.Components
 {
     public class Fighter : BaseComponent
     {
-        public int MaxHp { get; private set; }
+        public int MaxHp { get; set; }
 
         private int _hp;
         public int Hp
@@ -23,9 +23,9 @@ namespace TutorialRoguelike.Components
             }
         }
 
-        public int Defense { get; private set; }
+        public int Defense { get; set; }
 
-        public int Power { get; private set; }
+        public int Power { get; set; }
 
         public Actor Actor { get => (Actor) Parent; }
 
@@ -69,6 +69,8 @@ namespace TutorialRoguelike.Components
             }
             Parent = EntityFactory.Corpse(Actor);
             Engine.MessageLog.Add(deathMessage, deathColor);
+
+            Engine.Player.Level.AddXp(Actor.Level.XpGiven);
         }
 
     }

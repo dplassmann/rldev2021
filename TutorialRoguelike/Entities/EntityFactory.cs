@@ -16,17 +16,20 @@ namespace TutorialRoguelike.Entities
                 appearance: new ColoredGlyph(Colors.Player, Color.Transparent, (char)25),
                 name: "Player",
                 fighter: new Fighter(hp: 30, defense: 2, power: 5),
-                inventory: new Inventory(26));
+                inventory: new Inventory(26),
+                level: new Level(levelUpBase: 200));
         public static Actor Orc => new Actor<HostileEnemy>(
                 appearance: new ColoredGlyph(Colors.Orc, Color.Transparent, (char)121),
                 name: "Orc",
                 fighter: new Fighter(hp: 10, defense: 0, power: 3),
-                inventory: new Inventory(0));
+                inventory: new Inventory(0),
+                level: new Level(xpGiven: 35));
         public static Actor Troll => new Actor<HostileEnemy>(
                 appearance: new ColoredGlyph(Colors.Orc, Color.Transparent, (char)414),
                 name: "Troll",
                 fighter: new Fighter(hp: 16, defense: 1, power: 4),
-                inventory: new Inventory(0));
+                inventory: new Inventory(0),
+                level: new Level(xpGiven: 100));
 
         //Items
         public static Item HealthPotion => new Item(

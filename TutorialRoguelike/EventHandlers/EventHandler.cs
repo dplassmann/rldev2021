@@ -64,6 +64,9 @@ namespace TutorialRoguelike.EventHandlers
                 {
                     // The player was killed sometime during or after the action
                     return new GameOverEventHandler(Engine);
+                } else if (Engine.Player.Level.RequiresLevelUp)
+                {
+                    return new LevelUpEventHandler(Engine);
                 }
                 return new MainGameEventHandler(Engine);
             }
