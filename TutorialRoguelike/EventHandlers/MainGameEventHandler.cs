@@ -47,6 +47,11 @@ namespace TutorialRoguelike.EventHandlers
                 return new InventoryDropHandler(Engine);
             }
 
+            if (keyboard.IsKeyPressed(Keys.C))
+            {
+                return new CharacterScreenEventHandler(Engine);
+            }
+
             if (keyboard.IsKeyPressed(Keys.Divide))
             {
                 return new LookHandler(Engine);
