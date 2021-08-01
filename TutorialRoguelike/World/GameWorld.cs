@@ -12,12 +12,10 @@ namespace TutorialRoguelike.World
         public int MaxRooms { get; private set; }
         public int RoomMinSize { get; private set; }
         public int RoomMaxSize { get; private set; }
-        public int MaxMonstersPerRoom { get; private set; }
-        public int MaxItemsPerRoom { get; private set; }
         
         public int CurrentFloor { get; private set; }
 
-        public GameWorld(Engine engine, int mapWidth, int mapHeight, int maxRooms, int roomMinSize, int roomMaxSize, int maxMonstersPerRoom, int maxItemsPerRoom, int currentFloor = 0)
+        public GameWorld(Engine engine, int mapWidth, int mapHeight, int maxRooms, int roomMinSize, int roomMaxSize, int currentFloor = 0)
         {
             Engine = engine;
             MapWidth = mapWidth;
@@ -25,15 +23,13 @@ namespace TutorialRoguelike.World
             MaxRooms = maxRooms;
             RoomMinSize = roomMinSize;
             RoomMaxSize = roomMaxSize;
-            MaxMonstersPerRoom = maxMonstersPerRoom;
-            MaxItemsPerRoom = maxItemsPerRoom;
             CurrentFloor = currentFloor;
         }
 
         public void GenerateFloor()
         {
             CurrentFloor += 1;
-            Engine.Map = MapGenerator.GenerateDungeon(MapWidth, MapHeight, MaxRooms, RoomMinSize, RoomMaxSize, MaxMonstersPerRoom, MaxItemsPerRoom, Engine);
+            Engine.Map = MapGenerator.GenerateDungeon(MapWidth, MapHeight, MaxRooms, RoomMinSize, RoomMaxSize, Engine);
         }
     }
 }

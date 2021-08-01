@@ -17,8 +17,6 @@ namespace TutorialRoguelike
             int roomMinSize = 6;
             int roomMaxSize = 10;
             int maxRooms = 30;
-            int maxMonstersPerRoom = 2;
-            int maxItemsPerRoom = 2;
 
             int infoPanelWidth = windowWidth;
             int infoPanelHeight = 5;
@@ -26,7 +24,7 @@ namespace TutorialRoguelike
             int dungeonWidth = windowWidth;
             int dungeonHeight = windowHeight - infoPanelHeight;
 
-            var player = EntityFactory.Player;
+            var player = EntityFactory.Player();
 
             var startingConsole = (Console)GameHost.Instance.Screen;
 
@@ -35,7 +33,7 @@ namespace TutorialRoguelike
             startingConsole.Children.Add(infoConsole);
 
             var engine = new Engine(player, startingConsole, infoConsole);
-            engine.World = new GameWorld(engine, dungeonWidth, dungeonHeight, maxRooms, roomMinSize, roomMaxSize, maxMonstersPerRoom, maxItemsPerRoom);
+            engine.World = new GameWorld(engine, dungeonWidth, dungeonHeight, maxRooms, roomMinSize, roomMaxSize);
             engine.World.GenerateFloor();
 
             startingConsole.IsFocused = true;
