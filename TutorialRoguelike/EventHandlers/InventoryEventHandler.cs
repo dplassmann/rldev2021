@@ -2,35 +2,17 @@
 using System.Linq;
 using SadConsole;
 using SadConsole.Input;
-using TutorialRoguelike.Actions;
 using TutorialRoguelike.Constants;
 using TutorialRoguelike.Entities;
-using SadRogue.Primitives;
 
 namespace TutorialRoguelike.EventHandlers
 {
-    public abstract class InventoryEventHandler : AskUserEventHandler
+    public abstract class InventoryEventHandler : DialogBoxEventHandler
     {
-        protected abstract string Title { get; }
-        private SadConsole.Console Console { get; set; }
-
-        public InventoryEventHandler(Engine engine) : base(engine)
+        public InventoryEventHandler(Engine engine, string title) : base(engine, (title.Length + 4) * 2, Math.Max(3, engine.Player.Inventory.Items.Count + 2), title)
         {
             var inventory = Engine.Player.Inventory.Items;
             var numberOfItemsInInventory = inventory.Count;
-            var width = (Title.Length + 4) * 2;
-            var height = Math.Max(3, numberOfItemsInInventory + 2);
-            var x = Engine.Player.Position.X <= 30 ? 80 : 0;
-            var y = 0;
-
-            Console = new SadConsole.Console(width, height);
-            Console.Font = Game.Instance.EmbeddedFont;
-            Console.Position = (x, y);
-            Engine.Console.Children.Add(Console);
-
-            Console.DrawBox(new Rectangle(0, 0, width, height), new ColoredGlyph(Color.White, Color.Black), new ColoredGlyph(Color.White, Color.Black), ICellSurface.ConnectedLineThin);
-            Console.Print(1, 0, Title.Align(HorizontalAlignment.Center, width-2, (char)ICellSurface.ConnectedLineThin[(int)ICellSurface.ConnectedLineIndex.Top]), Color.White, Color.Black);
-
             if (numberOfItemsInInventory > 0)
             {
                 for (int i = 0; i < numberOfItemsInInventory; i++)
@@ -43,21 +25,6 @@ namespace TutorialRoguelike.EventHandlers
             {
                 Console.Print(1, 1, "(Empty)");
             }
-        }
-
-        // Renders an inventory menu, which displays the items in the inventory and the letter to select them.
-        // Will move to a different position based on where the player is located, so the player
-        // can always see where they are.
-        public override void Render()
-        {
-            base.Render();
-
-        }
-
-        public override void OnDestroy()
-        {
-            Console.Parent = null;
-            base.OnDestroy();
         }
 
         public override IActionOrEventHandler ProcessKeyboard(IScreenObject host, Keyboard keyboard)
