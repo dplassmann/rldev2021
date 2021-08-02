@@ -19,7 +19,8 @@ namespace TutorialRoguelike.Actions
         //Invoke the item's ability, this action will be given to provide context
         public override void Perform()
         {
-            Item.Consumable.Activate(this);
+            if (Item.Consumable != null)
+                Item.Consumable.Activate(this);
         }
     }
 }

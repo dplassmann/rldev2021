@@ -25,8 +25,8 @@ namespace TutorialRoguelike.World
         public static Dictionary<int, List<(Func<Entity>, int)>> ItemChances = new Dictionary<int, List<(Func<Entity>, int)>>{
             {0, new List<(Func<Entity>, int)> {(EntityFactory.HealthPotion, 35)} },
             {2, new List<(Func<Entity>, int)> {(EntityFactory.ConfusionScroll, 10)} },
-            {4, new List<(Func<Entity>, int)> {(EntityFactory.LightningScroll, 25)} },
-            {6, new List<(Func<Entity>, int)> {(EntityFactory.FireballScroll, 25)} },
+            {4, new List<(Func<Entity>, int)> {(EntityFactory.LightningScroll, 25), (EntityFactory.Sword, 5)} },
+            {6, new List<(Func<Entity>, int)> {(EntityFactory.FireballScroll, 25), (EntityFactory.ChainMail, 15)} },
         };
 
         public static Dictionary<int, List<(Func<Entity>, int)>> EnemyChances = new Dictionary<int, List<(Func<Entity>, int)>>{

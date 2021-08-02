@@ -8,18 +8,29 @@ namespace TutorialRoguelike.Entities
     public class Item : Entity
     {
         public Consumable Consumable { get; private set; }
+        public Equippable Equippable { get; private set; }
 
         [JsonConstructor]
-        public Item(ColoredGlyph appearance, string name, Consumable consumable) : base(appearance, name, false, RenderOrder.Item)
+        public Item(ColoredGlyph appearance, string name, Consumable consumable = null, Equippable equippable = null) : base(appearance, name, false, RenderOrder.Item)
         {
             Consumable = consumable;
-            Consumable.Parent = this;
+            if (Consumable != null)
+                Consumable.Parent = this;
+
+            Equippable = equippable;
+            if (Equippable != null)
+                Equippable.Parent = this;
         }
 
         public Item(Item serializableItem) : base(serializableItem.Appearance, serializableItem.Name, false, RenderOrder.Item)
         {
             Consumable = serializableItem.Consumable;
-            Consumable.Parent = this;
+            if (Consumable != null)
+                Consumable.Parent = this;
+
+            Equippable = serializableItem.Equippable;
+            if (Equippable != null)
+                Equippable.Parent = this;
         }
     }
 }

@@ -23,7 +23,7 @@ namespace TutorialRoguelike.Components
         public Inventory(Inventory serializableInventory)
         {
             Capacity = serializableInventory.Capacity;
-            Items = serializableInventory.Items.Select(i => new Item(i)).ToList();
+            Items = serializableInventory.Items;
             foreach (var item in Items)
             {
                 item.Parent = this;

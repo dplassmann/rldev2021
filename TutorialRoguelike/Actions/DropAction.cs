@@ -11,6 +11,9 @@ namespace TutorialRoguelike.Actions
 
         public override void Perform()
         {
+            if (Entity.Equipment.IsItemEquipped(Item))
+                Entity.Equipment.ToggleEquipment(Item);
+
             Entity.Inventory.Drop(Item);
         }
     }

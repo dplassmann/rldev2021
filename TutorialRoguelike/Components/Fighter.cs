@@ -23,22 +23,34 @@ namespace TutorialRoguelike.Components
             }
         }
 
-        public int Defense { get; set; }
+        public int BaseDefense { get; set; }
+        public int BasePower { get; set; }
 
-        public int Power { get; set; }
+        [JsonIgnore]
+        public int DefenseBonus => Actor?.Equipment?.DefenseBonus ?? 0;
 
+        [JsonIgnore]
+        public int PowerBonus => Actor?.Equipment?.PowerBonus ?? 0;
+
+        [JsonIgnore]
+        public int Defense => BaseDefense + DefenseBonus;
+
+        [JsonIgnore]
+        public int Power => BasePower + PowerBonus;
+        
+        [JsonIgnore]
         public Actor Actor { get => (Actor) Parent; }
 
         [JsonConstructor]
-        public Fighter(int hp, int maxHp, int defense, int power)
+        public Fighter(int hp, int maxHp, int baseDefense, int basePower)
         {
             MaxHp = maxHp;
             _hp = hp;
-            Defense = defense;
-            Power = power;
+            BaseDefense = baseDefense;
+            BasePower = basePower;
         }
 
-        public Fighter(int hp, int defense, int power) : this(hp, hp, defense, power) { }
+        public Fighter(int hp, int baseDefense, int basePower) : this(hp, hp, baseDefense, basePower) { }
 
         public int Heal(int amount)
         {

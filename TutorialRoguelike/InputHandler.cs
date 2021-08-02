@@ -49,23 +49,22 @@ namespace TutorialRoguelike
             }
             catch (QuitWithoutSaving)
             {
+                Program.SaveOnExit = false;
                 Exit();
             }
             catch (SystemExit)
             {
-                SaveGame();
                 Exit();
             }
             catch (Exception)
             {
-                SaveGame();
                 Exit();
             }
 
             Handler.Render();
         }
 
-        private void SaveGame()
+        public void SaveGame()
         {
             if (Handler.Engine != null)
             {

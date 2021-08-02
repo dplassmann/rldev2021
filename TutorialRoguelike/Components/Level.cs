@@ -60,7 +60,7 @@ namespace TutorialRoguelike.Components
 
         public void IncreasePower(int amount = 1)
         {
-            Actor.Fighter.Power += amount;
+            Actor.Fighter.BasePower += amount;
 
             Engine.MessageLog.Add("You feel stornger!");
             IncreaseLevel();
@@ -68,7 +68,7 @@ namespace TutorialRoguelike.Components
 
         public void IncreaseDefense(int amount = 1)
         {
-            Actor.Fighter.Defense += amount;
+            Actor.Fighter.BaseDefense += amount;
 
             Engine.MessageLog.Add("Your movements are getting swifter!");
             IncreaseLevel();

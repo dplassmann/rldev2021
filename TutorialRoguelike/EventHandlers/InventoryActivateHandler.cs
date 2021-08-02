@@ -1,4 +1,5 @@
-﻿using TutorialRoguelike.Entities;
+﻿using TutorialRoguelike.Actions;
+using TutorialRoguelike.Entities;
 
 namespace TutorialRoguelike.EventHandlers
 {
@@ -10,7 +11,12 @@ namespace TutorialRoguelike.EventHandlers
 
         protected override IActionOrEventHandler ItemSelected(Item item)
         {
-            return item.Consumable.GetAction(Engine.Player);
+            if (item.Consumable != null)
+                return item.Consumable.GetAction(Engine.Player);
+            else if (item.Equippable != null)
+                return new EquipAction(Engine.Player, item);
+            else
+                return null;
         }
     }
 }

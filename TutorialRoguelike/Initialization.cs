@@ -41,6 +41,17 @@ namespace TutorialRoguelike
 
             engine.MessageLog.Add("Hello and welcome, adventurer, to yet another dungeon", Colors.WelcomeText);
 
+            var startingWeapon = EntityFactory.Dagger();
+            var startingArmor = EntityFactory.LeatherArmor();
+
+            player.Inventory.Items.Add(startingWeapon);
+            startingWeapon.Parent = player.Inventory;
+            player.Equipment.ToggleEquipment(startingWeapon, false);
+
+            player.Inventory.Items.Add(startingArmor);
+            startingArmor.Parent = player.Inventory;
+            player.Equipment.ToggleEquipment(startingArmor, false);
+
             engine.UpdateFov();
             engine.Render();
 

@@ -17,8 +17,10 @@ namespace TutorialRoguelike.EventHandlers
             {
                 for (int i = 0; i < numberOfItemsInInventory; i++)
                 {
+                    var isEquipped = Engine.Player.Equipment.IsItemEquipped(inventory[i]);
+
                     var itemKey = (char)('a' + i);
-                    Console.Print(1, i + 1, $"({itemKey}) {inventory[i].Name}");
+                    Console.Print(1, i + 1, $"({itemKey}) {inventory[i].Name}" + (isEquipped ? " (E)" : ""));
                 }
             }
             else

@@ -9,14 +9,19 @@ namespace TutorialRoguelike.Entities
 {
     public class Actor : Entity
     {
+        public BaseAI AI { get; set; }
+        public Equipment Equipment { get; private set; }
         public Fighter Fighter { get; private set; }
         public Inventory Inventory { get; private set; }
-        public BaseAI AI { get; set; }
         public Level Level { get; private set; }
 
         [JsonConstructor]
-        public Actor(ColoredGlyph appearance, string name, Fighter fighter, Inventory inventory, Level level, GameMap map = null) : base(appearance, name, true, RenderOrder.Actor, map)
+        public Actor(ColoredGlyph appearance, string name, Equipment equipment, Fighter fighter, Inventory inventory, Level level, GameMap map = null) 
+            : base(appearance, name, true, RenderOrder.Actor, map)
         {
+            Equipment = equipment;
+            Equipment.Parent = this;
+
             Fighter = fighter;
             Fighter.Parent = this;
 
@@ -29,6 +34,9 @@ namespace TutorialRoguelike.Entities
 
         public Actor(Actor serializableActor, GameMap map = null) : base(serializableActor, map)
         {
+            Equipment = serializableActor.Equipment;
+            Equipment.Parent = this;
+
             Fighter = serializableActor.Fighter;
             Fighter.Parent = this;
 
@@ -49,7 +57,8 @@ namespace TutorialRoguelike.Entities
     public class Actor<T> : Actor where T : BaseAI
     {
 
-        public Actor(ColoredGlyph appearance, string name, Fighter fighter, Inventory inventory, Level level, GameMap map = null) : base(appearance, name, fighter, inventory, level, map)
+        public Actor(ColoredGlyph appearance, string name, Equipment equipment, Fighter fighter, Inventory inventory, Level level, GameMap map = null) 
+            : base(appearance, name, equipment, fighter, inventory, level, map)
         {
             var aiConstructor = typeof(T).GetConstructor(new[] { typeof(Actor) });
             AI = (T)aiConstructor.Invoke(new object[] { this });

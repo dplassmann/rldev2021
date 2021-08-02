@@ -11,6 +11,9 @@ namespace TutorialRoguelike.Constants
         public static readonly Color LightningScroll = Color.Yellow;
         public static readonly Color ConfusionScroll = Color.BlueViolet;
         public static readonly Color FireballScroll = Color.OrangeRed;
+        public static readonly Color Weapon = Color.Gold;
+        public static readonly Color LeatherArmor = Color.Khaki;
+        public static readonly Color ChainMail = Color.Silver;
 
         //Terrain
         public static readonly Color Floor = new Color(50, 50, 50);
