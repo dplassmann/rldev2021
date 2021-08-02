@@ -20,7 +20,7 @@ namespace TutorialRoguelike.UI
             var mainConsole = (Console)GameHost.Instance.Screen;
             var width = 2 * mainConsole.Width;
             var height = mainConsole.Height;
-            var backgroundTexture = GameHost.Instance.GetTexture("menu_background.png");
+            var backgroundTexture = GameHost.Instance.GetTexture("UI/menu_background.png");
             var backgroundSurface = backgroundTexture.ToSurface(TextureConvertMode.Background, width, height);
 
             MenuConsole = new Console(backgroundSurface);

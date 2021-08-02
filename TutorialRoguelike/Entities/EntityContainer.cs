@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using TutorialRoguelike.Entities;
 using TutorialRoguelike.World;
 
-namespace TutorialRoguelike
+namespace TutorialRoguelike.Entities
 {
     // Somthing that holds entities
     public interface EntityContainer

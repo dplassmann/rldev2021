@@ -19,7 +19,7 @@
     <None Update="Fonts\OneBit.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="menu_background.png">
+    <None Update="UI\menu_background.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
